@@ -1,0 +1,19 @@
+{
+  "name": "LUMI多语言AI翻译助手",
+"id": "1532649489372583234",
+  "documentAccess": "dynamic-page",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figma"
+  ],
+  "networkAccess": {
+    "allowedDomains": [
+      "*"
+    ],
+    "reasoning": "需要访问用户配置的大语言模型API服务"
+  }
+} 

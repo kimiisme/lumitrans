@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LUMI多语言AI翻译助手</title>
+    <!-- Google Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    
+    <!-- 多语言数据 -->
+    <script>
+        // 语言文件
+        const i18nData = {
+            'zh-CN': {
+                // 主界面
+                title: 'LUMI翻译助手',
+                settings: '设置',
+                selectedText: '个文本图层已选中',
+                targetLanguage: '翻译目标语言',
+                model: '模型',
+                promptTemplate: '提示词模板',
+                startTranslation: '开始翻译',
+                stopTranslation: '停止翻译',
+                
+                // 设置对话框
+                apiUrl: 'API地址',
+                apiKey: 'API密钥',
+                prompt: '提示词',
+                save: '保存',
+                close: '关闭',
+                
+                // 语言选择
+                language: '界面语言',
+                
+                // 占位符文本
+                placeholderApiUrl: 'https://api.openai.com/v1/chat/completions',
+                placeholderApiKey: 'sk-...',
+                placeholderModel: 'gpt-4.1-nano',
+                placeholderPrompt: '你是一个专业的翻译助手...',
+                placeholderPromptName: '为此提示词命名...',
+                
+                // 状态消息
+                statusConfigNeeded: '请先配置API设置',
+                statusConfigured: '配置已完成',
+                statusTranslating: '翻译中...',
+                statusCompleted: '翻译完成！',
+                statusStopping: '正在停止翻译...',
+                statusError: '翻译出错',
+                
+                // 进度消息
+                progressProcessing: '正在处理',
+                progressTranslating: '翻译进度',
+                
+                // 提示词模板
+                templateStandard: '标准翻译',
+                templateLocalization: '本地化',
+                templateUI: '界面文案',
+                templateTechnical: '技术文档',
+                
+                // 提示词模板内容
+                promptContentStandard: '你是一个专业的翻译助手。请将用户提供的文本翻译成{targetLanguage}。只返回翻译结果，不要添加任何解释或其他内容。',
+                promptContentLocalization: '你是一个专业的本地化专家。请将以下文本翻译成{targetLanguage}，保持原文的语气和风格，使其符合目标语言的表达习惯。只返回翻译结果。',
+                promptContentUI: '你是一个UI/UX文案专家。请将以下界面文本翻译成{targetLanguage}，要求简洁明了，符合用户界面的表达规范。只返回翻译结果。',
+                promptContentTechnical: '你是一个技术文档翻译专家。请将以下技术文本翻译成{targetLanguage}，保持专业术语的准确性。只返回翻译结果。',
+                
+                // 成功/错误消息
+                promptSaved: '提示词 "{name}" 已保存',
+                promptDeleted: '提示词 "{name}" 已删除',
+                promptSavedFailed: '提示词名称和内容不能为空',
+                modelSaved: '模型 "{name}" 已保存',
+                modelDeleted: '模型 "{name}" 已删除',
+                modelSavedFailed: '请先输入模型名称',
+                modelSavedDuplicate: '模型 "{name}" 已存在',
+                modelSwitched: '已切换到模型: {modelName}',
+                promptSwitched: '已切换提示词模板',
+                configSaved: '配置已保存',
+                languageSwitched: '目标语言已切换为: {language}',
+                translationStarted: '开始翻译...',
+                translationStopping: '正在停止翻译...',
+                translationStopped: '翻译已停止 - 已完成 {completed}/{total} 个文本',
+                translationCompletedPartial: '翻译完成！已完成 {completed}/{total} 个文本（部分失败）',
+                translationCompletedAll: '翻译完成！所有文本翻译成功',
+                
+                // 进度消息详细版本
+                progressProcessingDetail: '正在处理 ({completed}/{total}): {currentText}',
+                progressTranslatingDetail: '翻译进度: {completed}/{total} ({progress}%) - 已完成: {currentText}',
+                progressTranslatingSimple: '翻译进度: {completed}/{total} ({progress}%)',
+                
+                // 语言名称
+                languages: {
+                    'zh-CN': '简体中文',
+                    'zh-TW': '繁体中文',
+                    'en': '英语',
+                    'ja': '日语',
+                    'ko': '韩语',
+                    'fr': '法语',
+                    'de': '德语',
+                    'es': '西班牙语',
+                    'ru': '俄语',
+                    'ar': '阿拉伯语',
+                    'pt': '葡萄牙语',
+                    'it': '意大利语',
+                    'nl': '荷兰语',
+                    'sv': '瑞典语',
+                    'da': '丹麦语',
+                    'no': '挪威语',
+                    'fi': '芬兰语',
+                    'pl': '波兰语',
+                    'cs': '捷克语',
+                    'hu': '匈牙利语',
+                    'tr': '土耳其语',
+                    'th': '泰语',
+                    'vi': '越南语',
+                    'hi': '印地语',
+                    'he': '希伯来语',
+                    'uk': '乌克兰语'
+                }
+            },
+            
+            'en': {
+                // Main interface
+                title: 'LUMI Translator',
+                settings: 'Settings',
+                selectedText: 'text layers selected',
+                targetLanguage: 'Target Language',
+                model: 'Model',
+                promptTemplate: 'Prompt Template',
+                startTranslation: 'Start Translation',
+                stopTranslation: 'Stop Translation',
+                
+                // Settings dialog
+                apiUrl: 'API URL',
+                apiKey: 'API Key',
+                prompt: 'Prompt',
+                save: 'Save',
+                close: 'Close',
+                
+                // Language selection
+                language: 'Interface Language',
+                
+                // Placeholders
+                placeholderApiUrl: 'https://api.openai.com/v1/chat/completions',
+                placeholderApiKey: 'sk-...',
+                placeholderModel: 'gpt-4.1-nano',
+                placeholderPrompt: 'You are a professional translator...',
+                placeholderPromptName: 'Name this prompt...',
+                
+                // Status messages
+                statusConfigNeeded: 'Please configure API settings first',
+                statusConfigured: 'Configuration complete',
+                statusTranslating: 'Translating...',
+                statusCompleted: 'Translation completed!',
+                statusStopping: 'Stopping translation...',
+                statusError: 'Translation error',
+                
+                // Progress messages
+                progressProcessing: 'Processing',
+                progressTranslating: 'Translation progress',
+                
+                // Prompt templates
+                templateStandard: 'Standard',
+                templateLocalization: 'Localization',
+                templateUI: 'UI Text',
+                templateTechnical: 'Technical',
+                
+                // Prompt templates content
+                promptContentStandard: 'You are a professional translator. Please translate the text provided by the user into {targetLanguage}. Return only the translation, without any explanation or other content.',
+                promptContentLocalization: 'You are a professional localizer. Please translate the following text into {targetLanguage}, maintaining the original tone and style, so that it fits the expression habits of the target language. Return only the translation.',
+                promptContentUI: 'You are a UI/UX copywriter. Please translate the following interface text into {targetLanguage}, keeping it simple and clear, to fit the expression norms of the user interface. Return only the translation.',
+                promptContentTechnical: 'You are a technical document translator. Please translate the following technical text into {targetLanguage}, maintaining the accuracy of professional terms. Return only the translation.',
+                
+                // Success/Error messages
+                promptSaved: 'Prompt saved',
+                promptDeleted: 'Prompt deleted',
+                promptSavedFailed: 'Prompt name and content cannot be empty',
+                modelSaved: 'Model "{name}" saved',
+                modelDeleted: 'Model "{name}" deleted',
+                modelSavedFailed: 'Please enter a model name first',
+                modelSavedDuplicate: 'Model "{name}" already exists',
+                modelSwitched: 'Switched to model: {modelName}',
+                promptSwitched: 'Switched prompt template',
+                configSaved: 'Configuration saved',
+                languageSwitched: 'Target language switched to: {language}',
+                translationStarted: 'Translation started...',
+                translationStopping: 'Stopping translation...',
+                translationStopped: 'Translation stopped - Completed {completed}/{total} texts',
+                translationCompletedPartial: 'Translation completed! Finished {completed}/{total} texts (some failed)',
+                translationCompletedAll: 'Translation completed! All texts translated successfully',
+                
+                // Progress messages
+                progressProcessingDetail: 'Processing ({completed}/{total}): {currentText}',
+                progressTranslatingDetail: 'Translation progress: {completed}/{total} ({progress}%) - Completed: {currentText}',
+                progressTranslatingSimple: 'Translation progress: {completed}/{total} ({progress}%)',
+                
+                // Language names
+                languages: {
+                    'zh-CN': 'Simplified Chinese',
+                    'zh-TW': 'Traditional Chinese', 
+                    'en': 'English',
+                    'ja': 'Japanese',
+                    'ko': 'Korean',
+                    'fr': 'French',
+                    'de': 'German',
+                    'es': 'Spanish',
+                    'ru': 'Russian',
+                    'ar': 'Arabic',
+                    'pt': 'Portuguese',
+                    'it': 'Italian',
+                    'nl': 'Dutch',
+                    'sv': 'Swedish',
+                    'da': 'Danish',
+                    'no': 'Norwegian',
+                    'fi': 'Finnish',
+                    'pl': 'Polish',
+                    'cs': 'Czech',
+                    'hu': 'Hungarian',
+                    'tr': 'Turkish',
+                    'th': 'Thai',
+                    'vi': 'Vietnamese',
+                    'hi': 'Hindi',
+                    'he': 'Hebrew',
+                    'uk': 'Ukrainian'
+                }
+            },
+            
+            'ja': {
+                // メインインターフェース
+                title: 'LUMI翻訳アシスタント',
+                settings: '設定',
+                selectedText: 'のテキストレイヤーが選択されています',
+                targetLanguage: '翻訳先言語',
+                model: 'モデル',
+                promptTemplate: 'プロンプトテンプレート',
+                startTranslation: '翻訳開始',
+                stopTranslation: '翻訳停止',
+                
+                // 設定ダイアログ
+                apiUrl: 'API URL',
+                apiKey: 'API キー',
+                prompt: 'プロンプト',
+                save: '保存',
+                close: '閉じる',
+                
+                // 言語選択
+                language: 'インターフェース言語',
+                
+                // プレースホルダー
+                placeholderApiUrl: 'https://api.openai.com/v1/chat/completions',
+                placeholderApiKey: 'sk-...',
+                placeholderModel: 'gpt-4.1-nano',
+                placeholderPrompt: 'あなたは専門的な翻訳者です...',
+                placeholderPromptName: 'このプロンプトに名前を付ける...',
+                
+                // ステータスメッセージ
+                statusConfigNeeded: 'まずAPI設定を構成してください',
+                statusConfigured: '設定完了',
+                statusTranslating: '翻訳中...',
+                statusCompleted: '翻訳完了！',
+                statusStopping: '翻訳を停止中...',
+                statusError: '翻訳エラー',
+                
+                // プログレスメッセージ
+                progressProcessing: '処理中',
+                progressTranslating: '翻訳進行状況',
+                
+                // プロンプトテンプレート
+                templateStandard: '標準翻訳',
+                templateLocalization: 'ローカライゼーション',
+                templateUI: 'UIテキスト',
+                templateTechnical: '技術文書',
+                
+                // Prompt templates content
+                promptContentStandard: 'あなたは専門的な翻訳者です。ユーザーから提供されたテキストを{targetLanguage}に翻訳してください。翻訳結果のみを返し、説明やその他の内容は追加しないでください。',
+                promptContentLocalization: 'あなたは専門的なローカライザーです。以下のテキストを{targetLanguage}に翻訳し、原文のトーンとスタイルを維持して、その言語の表現習慣に合わせてください。翻訳結果のみを返してください。',
+                promptContentUI: 'あなたはUI/UXコピーライターです。以下のインターフェーステキストを{targetLanguage}に翻訳し、シンプルで明確な表現にして、ユーザーのインターフェースの表現規範に合わせてください。翻訳結果のみを返してください。',
+                promptContentTechnical: 'あなたは技術文書翻訳専門家です。以下の技術テキストを{targetLanguage}に翻訳し、専門用語の正確性を維持してください。翻訳結果のみを返してください。',
+                
+                // 成功/エラーメッセージ
+                promptSaved: 'プロンプトが保存されました',
+                promptDeleted: 'プロンプトが削除されました',
+                promptSavedFailed: 'プロンプトの名前と内容を入力してください',
+                modelSaved: 'モデル"{name}"が保存されました',
+                modelDeleted: 'モデル"{name}"が削除されました',
+                modelSavedFailed: 'まずモデルの名前を入力してください',
+                modelSavedDuplicate: 'モデル"{name}"は既に存在します',
+                modelSwitched: 'モデル: {modelName}に切り替えました',
+                promptSwitched: 'プロンプトテンプレートを切り替えました',
+                configSaved: '設定が保存されました',
+                languageSwitched: '対象言語が{language}に切り替えました',
+                translationStarted: '翻訳開始...',
+                translationStopping: '翻訳を停止中...',
+                translationStopped: '翻訳が停止されました - {completed}/{total}個のテキストが完了',
+                translationCompletedPartial: '翻訳完了！{completed}/{total}個のテキストが完了（一部失敗）',
+                translationCompletedAll: '翻訳完了！すべてのテキストが正常に翻訳されました',
+                
+                // プログレスメッセージ詳細版
+                progressProcessingDetail: '処理中 ({completed}/{total}): {currentText}',
+                progressTranslatingDetail: '翻訳進行状況: {completed}/{total} ({progress}%) - 完了: {currentText}',
+                progressTranslatingSimple: '翻訳進行状況: {completed}/{total} ({progress}%)',
+                
+                // 言語名
+                languages: {
+                    'zh-CN': '簡体字中国語',
+                    'zh-TW': '繁体字中国語',
+                    'en': '英語',
+                    'ja': '日本語',
+                    'ko': '韓国語',
+                    'fr': 'フランス語',
+                    'de': 'ドイツ語',
+                    'es': 'スペイン語',
+                    'ru': 'ロシア語',
+                    'ar': 'アラビア語',
+                    'pt': 'ポルトガル語',
+                    'it': 'イタリア語',
+                    'nl': 'オランダ語',
+                    'sv': 'スウェーデン語',
+                    'da': 'デンマーク語',
+                    'no': 'ノルウェー語',
+                    'fi': 'フィンランド語',
+                    'pl': 'ポーランド語',
+                    'cs': 'チェコ語',
+                    'hu': 'ハンガリー語',
+                    'tr': 'トルコ語',
+                    'th': 'タイ語',
+                    'vi': 'ベトナム語',
+                    'hi': 'ヒンディー語',
+                    'he': 'ヘブライ語',
+                    'uk': 'ウクライナ語'
+                }
+            }
+        };
+        
+        // 当前语言设置
+        let currentUILanguage = 'zh-CN';
+        
+        // i18n 功能
+        function t(key, replacements = {}) {
+            const keys = key.split('.');
+            let value = i18nData[currentUILanguage];
+            
+            for (const k of keys) {
+                if (value && typeof value === 'object') {
+                    value = value[k];
+                } else {
+                    break;
+                }
+            }
+            
+            if (typeof value !== 'string') {
+                // 回退到中文
+                value = i18nData['zh-CN'];
+                for (const k of keys) {
+                    if (value && typeof value === 'object') {
+                        value = value[k];
+                    } else {
+                        break;
+                    }
+                }
+            }
+            
+            if (typeof value === 'string') {
+                // 替换占位符
+                return value.replace(/\{(\w+)\}/g, (match, key) => {
+                    return replacements[key] !== undefined ? replacements[key] : match;
+                });
+            }
+            
+            return key; // 如果找不到翻译，返回键名
+        }
+        
+        // 更新界面语言
+        function updateUILanguage() {
+            // 更新页面标题
+            document.title = t('title');
+            
+            // 更新所有带有 data-i18n 属性的元素
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = t(key);
+            });
+            
+            // 更新所有带有 data-i18n-placeholder 属性的元素
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                element.placeholder = t(key);
+            });
+            
+            // 更新所有带有 data-i18n-title 属性的元素
+            document.querySelectorAll('[data-i18n-title]').forEach(element => {
+                const key = element.getAttribute('data-i18n-title');
+                element.title = t(key);
+            });
+            
+            // 更新翻译目标语言下拉框的选项文本
+            const targetLanguageSelect = document.getElementById('targetLanguage');
+            if (targetLanguageSelect) {
+                targetLanguageSelect.querySelectorAll('option').forEach(option => {
+                    const langKey = option.value;
+                    if (langKey && t('languages.' + langKey)) {
+                        const flag = option.textContent.match(/🇨🇳|🇹🇼|🇺🇸|🇯🇵|🇰🇷|🇫🇷|🇩🇪|🇪🇸|🇷🇺|🇸🇦|🇵🇹|🇮🇹|🇳🇱|🇸🇪|🇩🇰|🇳🇴|🇫🇮|🇵🇱|🇨🇿|🇭🇺|🇹🇷|🇹🇭|🇻🇳|🇮🇳|🇮🇱|🇺🇦/);
+                        const flagText = flag ? ' ' + flag[0] : '';
+                        option.textContent = t('languages.' + langKey) + flagText;
+                    }
+                });
+            }
+            
+            // 更新快速提示词选择框的选项文本
+            const quickPromptSelect = document.getElementById('quickPromptSelect');
+            if (quickPromptSelect) {
+                quickPromptSelect.querySelectorAll('option').forEach(option => {
+                    const value = option.value;
+                    if (value && !value.startsWith('custom_')) {
+                        // 更新预设提示词选项的文本
+                        const templateNames = {
+                            'standard': 'templateStandard',
+                            'localization': 'templateLocalization', 
+                            'ui': 'templateUI',
+                            'technical': 'templateTechnical'
+                        };
+                        if (templateNames[value]) {
+                            option.textContent = t(templateNames[value]);
+                        }
+                    }
+                });
+            }
+            
+            // 更新设置弹窗中的提示词模板内容
+            const promptTags = document.querySelectorAll('.prompt-templates .prompt-tag:not(.custom-prompt-tag)');
+            promptTags.forEach(tag => {
+                // 根据data-template-type属性确定模板类型
+                const templateType = tag.getAttribute('data-template-type');
+                const promptContentKeys = {
+                    'standard': 'promptContentStandard',
+                    'localization': 'promptContentLocalization',
+                    'ui': 'promptContentUI',
+                    'technical': 'promptContentTechnical'
+                };
+                
+                if (promptContentKeys[templateType]) {
+                    const newPromptContent = t(promptContentKeys[templateType]);
+                    tag.setAttribute('data-prompt', newPromptContent);
+                }
+            });
+        }
+        
+        // 初始化语言设置
+        async function initLanguage() {
+            // 从存储中加载语言设置
+            try {
+                const savedLanguage = localStorage.getItem('ui-language');
+                if (savedLanguage && i18nData[savedLanguage]) {
+                    currentUILanguage = savedLanguage;
+                }
+            } catch (e) {
+                console.log('Could not load language setting:', e);
+            }
+            
+            // 设置UI语言选择框的值
+            const uiLanguageSelect = document.getElementById('uiLanguage');
+            if (uiLanguageSelect) {
+                uiLanguageSelect.value = currentUILanguage;
+            }
+            
+            updateUILanguage();
+            
+            // 确保下拉框选项文本也得到更新
+            setTimeout(() => {
+                if (typeof renderQuickPromptSelect === 'function') {
+                    renderQuickPromptSelect();
+                }
+                // 初始化完成后调整高度
+                adjustUIHeight();
+            }, 100);
+        }
+        
+        // 切换语言
+        function changeLanguage(language) {
+            if (i18nData[language]) {
+                currentUILanguage = language;
+                try {
+                    localStorage.setItem('ui-language', language);
+                } catch (e) {
+                    console.log('Could not save language setting:', e);
+                }
+                updateUILanguage();
+                
+                // 更新语言下拉框的选中状态
+                const langSelect = document.getElementById('uiLanguage');
+                if (langSelect) {
+                    langSelect.value = language;
+                }
+                
+                // 语言切换后调整高度
+                setTimeout(() => {
+                    adjustUIHeight();
+                }, 100);
+            }
+        }
+        
+        // 计算并调整UI高度
+        function adjustUIHeight() {
+            try {
+                // 计算实际内容高度
+                const container = document.querySelector('.container');
+                if (!container) return;
+                
+                // 获取容器的实际高度
+                const containerHeight = container.scrollHeight;
+                // 加上body的padding（上下各16px）
+                const totalHeight = containerHeight + 32;
+                
+                // 限制高度范围：最小400px，最大800px
+                const clampedHeight = Math.min(Math.max(totalHeight, 400), 800);
+                
+                // 发送调整高度的消息给主线程
+                parent.postMessage({
+                    pluginMessage: {
+                        type: 'resize-ui',
+                        width: 400,
+                        height: clampedHeight
+                    }
+                }, '*');
+            } catch (error) {
+                console.log('Failed to adjust UI height:', error);
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+            padding: 16px;
+            margin: 0;
+            min-height: 400px;
+            max-height: 80vh;
+            height: auto;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            height: auto;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .settings-btn {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 4px 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .settings-btn:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .settings-btn.active {
+            background: #007AFF;
+            color: white;
+            border-color: #007AFF;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            border-bottom: 2px solid #007AFF;
+            padding-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #555;
+            font-size: 13px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 12px;
+            transition: border-color 0.2s;
+        }
+
+        /* 优化下拉列表样式 */
+        select {
+            background: white;
+            padding: 10px 36px 10px 12px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1.5 4.5h9L6 9z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 12px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        select:hover {
+            border-color: #007AFF;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23007AFF' d='M6 9L1.5 4.5h9L6 9z'/%3E%3C/svg%3E");
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #007AFF;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23007AFF' d='M6 9L1.5 4.5h9L6 9z'/%3E%3C/svg%3E");
+        }
+
+        /* 下拉选项样式 */
+        select option {
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 400;
+            background: white;
+            color: #333;
+        }
+
+        select option:hover {
+            background: #f8f9fa;
+        }
+
+        select option:checked {
+            background: #007AFF;
+            color: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+            line-height: 1.4;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007AFF;
+            box-shadow: 0 0 0 2px rgba(0,122,255,0.1);
+        }
+
+        /* 表单容器样式优化 */
+        .select-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .select-icon {
+            position: absolute;
+            left: 12px;
+            color: #666;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .select-container select {
+            padding-left: 40px;
+        }
+
+        .select-container:hover .select-icon {
+            color: #007AFF;
+        }
+
+        .select-container select:focus + .select-icon,
+        .select-container select:focus ~ .select-icon {
+            color: #007AFF;
+        }
+
+        .btn {
+            display: inline-block;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            width: 100%;
+            padding: 12px 20px;
+        }
+
+        .btn-primary {
+            background: #007AFF;
+            color: white;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #0056CC;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            font-size: 16px;
+            padding: 14px 24px;
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            background: #c82333;
+        }
+
+        .btn-secondary {
+            background: #f1f3f5;
+            color: #495057;
+            border: 1px solid #dee2e6;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #e9ecef;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .status {
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 11px;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #cce7ff;
+            color: #004085;
+            border: 1px solid #99d5ff;
+        }
+
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .progress {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #007AFF;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .help-text {
+            font-size: 10px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #e9ecef;
+            border-top: 2px solid #007AFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Material Symbols 样式 */
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 18px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .icon-small {
+            font-size: 16px;
+        }
+
+        .icon-large {
+            font-size: 20px;
+        }
+
+        /* 设置弹窗样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            min-height: 300px;
+            max-height: 85vh;
+            height: auto;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px 16px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            padding: 4px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .modal-body {
+            padding: 24px;
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+
+        .modal-body .btn {
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .config-status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            background: #f8f9fa;
+            border-radius: 50px;
+            font-size: 11px;
+        }
+
+        .config-status.configured {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .config-status.not-configured {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #dc3545;
+        }
+
+        .status-indicator.configured {
+            background: #28a745;
+        }
+
+        .model-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 3px 12px;
+            background: #f3e5f5;
+            border-radius: 50px;
+            font-size: 12px;
+            color: #4a148c;
+        }
+
+        .language-section {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .language-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .information{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .selection-info {
+            background: #e8f4fd;
+            border: 1px solid #bee5eb;
+            border-radius: 6px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .selection-count {
+            font-size: 24px;
+            font-weight: 700;
+            color: #007AFF;
+            margin-bottom: 4px;
+        }
+
+        .selection-text {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .translate-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .progress-info {
+            text-align: center;
+            margin: 8px 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .btn-stop {
+            background: #dc3545;
+            color: white;
+            font-size: 16px;
+            padding: 14px 24px;
+        }
+
+        .btn-stop:hover:not(:disabled) {
+            background: #c82333;
+        }
+
+        .stop-spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .prompt-templates {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .prompt-tag {
+            background: #e8f5e8;
+            color: #2d5a2d;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .prompt-tag:hover {
+            background: #d4edda;
+            transform: translateY(-1px);
+        }
+
+        /* 保存自定义模板样式 */
+        .save-prompt-section {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .save-prompt-input {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .save-prompt-input input {
+            flex-grow: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .save-prompt-input input:focus {
+            outline: none;
+            border-color: #007AFF;
+        }
+
+        .btn-save-prompt {
+            background: #007AFF;
+            color: white;
+            border: none;
+            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-save-prompt:hover:not(:disabled) {
+            background: #0056CC;
+        }
+
+        .btn-save-prompt:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* 自定义提示词样式 */
+        .custom-prompt-tag {
+            background: #e0f2f7;
+            color: #0056b3;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+        }
+
+        .custom-prompt-tag:hover {
+            background: #cce5ff;
+            transform: translateY(-1px);
+        }
+
+        .delete-prompt {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            padding: 2px;
+            border-radius: 50%;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            margin-left: 4px;
+        }
+
+        .delete-prompt:hover {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        .delete-prompt .material-symbols-outlined {
+            font-size: 12px;
+        }
+
+        /* 模型输入容器样式 */
+        .model-input-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .model-input-container input {
+            flex-grow: 1;
+        }
+
+        .btn-quick-save {
+            background: #007AFF;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .btn-quick-save:hover:not(:disabled) {
+            background: #0056CC;
+            transform: scale(1.05);
+        }
+
+        .btn-quick-save:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .model-templates {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .model-tag {
+            background: #e8f5e8;
+            color: #2d5a2d;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+        }
+
+        .model-tag:hover {
+            background: #d4edda;
+            transform: translateY(-1px);
+        }
+
+        .delete-model {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            padding: 2px;
+            border-radius: 50%;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            margin-left: 4px;
+        }
+
+        .delete-model:hover {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        .delete-model .material-symbols-outlined {
+            font-size: 12px;
+        }
+
+        /* 自定义模型标签样式 */
+        .custom-model-tag {
+            background: #fff3e0;
+            color: #e65100;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+        }
+
+        .custom-model-tag:hover {
+            background: #ffe0b2;
+            transform: translateY(-1px);
+        }
+
+        /* 快速切换区域样式 */
+        .quick-switch-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 16px 0 20px;
+            padding: 16px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+        }
+
+        .quick-switch-item {
+            text-align: left;
+        }
+
+        .quick-switch-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部区域 -->
+        <div class="header">
+            <div class="title">
+                <span class="material-symbols-outlined">translate</span>
+                <span data-i18n="title">LUMI翻译助手</span>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <!-- 语言切换 -->
+                <select id="uiLanguage" onchange="changeLanguage(this.value)" style="display: flex; width: auto; padding: 6px 8px; font-size: 11px; border: 1px solid #dee2e6; border-radius: 4px; background: #f8f9fa;">
+                    <option value="zh-CN">中文</option>
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                </select>
+                <button class="settings-btn" id="settingsToggle">
+                    <span class="material-symbols-outlined icon-small">settings</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 选中文本信息 -->
+        <div class="selection-info">
+            <div class="selection-count" id="selectionCount">0</div>
+            <div class="selection-text" data-i18n="selectedText">个文本图层已选中</div>
+        </div>
+
+        <!-- 目标语言选择 -->
+        <div class="language-section">
+            <div class="language-title">
+                <span class="material-symbols-outlined icon-small">language</span>
+                <span data-i18n="targetLanguage">翻译目标语言</span>
+            </div>
+            <div class="form-group">
+                <div class="select-container">
+                    <span class="material-symbols-outlined icon-small select-icon">public</span>
+                    <select id="targetLanguage">
+                        <option value="zh-CN">简体中文 🇨🇳</option>
+                        <option value="zh-TW">繁体中文 🇹🇼</option>
+                        <option value="en">英语 🇺🇸</option>
+                        <option value="ja">日语 🇯🇵</option>
+                        <option value="ko">韩语 🇰🇷</option>
+                        <option value="fr">法语 🇫🇷</option>
+                        <option value="de">德语 🇩🇪</option>
+                        <option value="es">西班牙语 🇪🇸</option>
+                        <option value="ru">俄语 🇷🇺</option>
+                        <option value="ar">阿拉伯语 🇸🇦</option>
+                        <option value="pt">葡萄牙语 🇵🇹</option>
+                        <option value="it">意大利语 🇮🇹</option>
+                        <option value="nl">荷兰语 🇳🇱</option>
+                        <option value="sv">瑞典语 🇸🇪</option>
+                        <option value="da">丹麦语 🇩🇰</option>
+                        <option value="no">挪威语 🇳🇴</option>
+                        <option value="fi">芬兰语 🇫🇮</option>
+                        <option value="pl">波兰语 🇵🇱</option>
+                        <option value="cs">捷克语 🇨🇿</option>
+                        <option value="hu">匈牙利语 🇭🇺</option>
+                        <option value="tr">土耳其语 🇹🇷</option>
+                        <option value="th">泰语 🇹🇭</option>
+                        <option value="vi">越南语 🇻🇳</option>
+                        <option value="hi">印地语 🇮🇳</option>
+                        <option value="he">希伯来语 🇮🇱</option>
+                        <option value="uk">乌克兰语 🇺🇦</option>
+                    </select>
+                </div>
+            </div>
+            <div class="information">
+                <!-- 配置状态显示 -->
+                <div id="configStatus" class="config-status not-configured">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText" data-i18n="statusConfigNeeded">请先配置API设置</span>
+                </div>
+
+                <div id="modelInfo" class="model-info hidden">
+                    <span class="material-symbols-outlined icon-small">smart_toy</span>
+                    <span id="currentModel">gpt-4.1-nano</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 快速切换区域 -->
+        <div class="quick-switch-section">
+            <!-- 模型快速切换 -->
+            <div class="quick-switch-item">
+                <div class="quick-switch-title">
+                    <span class="material-symbols-outlined icon-small">smart_toy</span>
+                    <span data-i18n="model">模型</span>
+                </div>
+                <div class="select-container">
+                    <span class="material-symbols-outlined icon-small select-icon">smart_toy</span>
+                    <select id="quickModelSelect">
+                        <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                        <!-- 自定义模型选项将动态插入 -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- 提示词模板快速切换 -->
+            <div class="quick-switch-item">
+                <div class="quick-switch-title">
+                    <span class="material-symbols-outlined icon-small">psychology</span>
+                    <span data-i18n="promptTemplate">提示词模板</span>
+                </div>
+                <div class="select-container">
+                    <span class="material-symbols-outlined icon-small select-icon">edit_note</span>
+                    <select id="quickPromptSelect">
+                        <option value="standard" data-i18n="templateStandard">标准翻译</option>
+                        <option value="localization" data-i18n="templateLocalization">本地化</option>
+                        <option value="ui" data-i18n="templateUI">界面文案</option>
+                        <option value="technical" data-i18n="templateTechnical">技术文档</option>
+                        <!-- 自定义提示词选项将动态插入 -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 翻译部分 -->
+        <div class="translate-section">
+            <button class="btn btn-primary" id="translateBtn" disabled>
+                <span class="material-symbols-outlined icon-small">rocket_launch</span>
+                <span data-i18n="startTranslation">开始翻译</span>
+            </button>
+            
+            <div id="progress" class="progress hidden">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <div id="progressInfo" class="progress-info hidden"></div>
+        </div>
+
+        <!-- 状态显示 -->
+        <div id="status"></div>
+    </div>
+
+    <!-- 设置弹窗 -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span data-i18n="settings">设置</span>
+                </div>
+                <button class="close-btn" id="closeModal">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="apiUrl" data-i18n="apiUrl">API地址</label>
+                    <input type="text" id="apiUrl" data-i18n-placeholder="placeholderApiUrl" placeholder="https://api.openai.com/v1/chat/completions">
+                </div>
+                
+                <div class="form-group">
+                    <label for="apiKey" data-i18n="apiKey">API密钥</label>
+                    <input type="password" id="apiKey" data-i18n-placeholder="placeholderApiKey" placeholder="sk-...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="modelName" data-i18n="model">模型</label>
+                    <div class="model-input-container">
+                        <input type="text" id="modelName" data-i18n-placeholder="placeholderModel" placeholder="gpt-4.1-nano">
+                        <button class="btn-quick-save" id="quickSaveModelBtn" data-i18n-title="save" title="保存当前模型">
+                            <span class="material-symbols-outlined icon-small">add</span>
+                        </button>
+                    </div>
+                    
+                    <div class="model-templates">
+                        <!-- 自定义模型将动态插入到这里 -->
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customPrompt" data-i18n="prompt">提示词</label>
+                    <textarea id="customPrompt" data-i18n-placeholder="placeholderPrompt" placeholder="你是一个专业的翻译助手..."></textarea>
+                    
+                    <!-- 保存自定义模板区域 -->
+                    <div class="save-prompt-section">
+                        <div class="save-prompt-input">
+                            <input type="text" id="promptName" data-i18n-placeholder="placeholderPromptName" placeholder="为此提示词命名..." maxlength="20">
+                            <button class="btn-save-prompt" id="savePromptBtn">
+                                <span class="material-symbols-outlined icon-small">bookmark_add</span>
+                                <span data-i18n="save">保存</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="prompt-templates">
+                        <span class="prompt-tag" data-template-type="standard" data-prompt="你是一个专业的翻译助手。请将用户提供的文本翻译成{targetLanguage}。只返回翻译结果，不要添加任何解释或其他内容。" data-i18n="templateStandard">标准</span>
+                        <span class="prompt-tag" data-template-type="localization" data-prompt="你是一个专业的本地化专家。请将以下文本翻译成{targetLanguage}，保持原文的语气和风格，使其符合目标语言的表达习惯。只返回翻译结果。" data-i18n="templateLocalization">本地化</span>
+                        <span class="prompt-tag" data-template-type="ui" data-prompt="你是一个UI/UX文案专家。请将以下界面文本翻译成{targetLanguage}，要求简洁明了，符合用户界面的表达规范。只返回翻译结果。" data-i18n="templateUI">界面</span>
+                        <span class="prompt-tag" data-template-type="technical" data-prompt="你是一个技术文档翻译专家。请将以下技术文本翻译成{targetLanguage}，保持专业术语的准确性。只返回翻译结果。" data-i18n="templateTechnical">技术</span>
+                        <!-- 自定义模板将动态插入到这里 -->
+                    </div>
+                </div>
+                
+                <button class="btn btn-secondary" id="saveConfig">
+                    <span class="material-symbols-outlined icon-small">save</span>
+                    <span data-i18n="save">保存</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 全局状态
+        let selectedCount = 0;
+        let isTranslating = false;
+        let config = {
+            apiUrl: '',
+            apiKey: '',
+            modelName: 'gpt-4.1-nano',
+            targetLanguage: 'zh-CN',
+            customPrompt: '你是一个专业的翻译助手。请将用户提供的文本翻译成{targetLanguage}。只返回翻译结果，不要添加任何解释或其他内容。',
+            customPrompts: [],
+            customModels: []
+        };
+
+        // DOM 元素
+        const elements = {
+            apiUrl: document.getElementById('apiUrl'),
+            apiKey: document.getElementById('apiKey'),
+            modelName: document.getElementById('modelName'),
+            customPrompt: document.getElementById('customPrompt'),
+            targetLanguage: document.getElementById('targetLanguage'),
+            saveConfig: document.getElementById('saveConfig'),
+            translateBtn: document.getElementById('translateBtn'),
+            status: document.getElementById('status'),
+            progress: document.getElementById('progress'),
+            progressBar: document.getElementById('progressBar'),
+            progressInfo: document.getElementById('progressInfo'),
+            settingsToggle: document.getElementById('settingsToggle'),
+            settingsModal: document.getElementById('settingsModal'),
+            closeModal: document.getElementById('closeModal'),
+            configStatus: document.getElementById('configStatus'),
+            statusIndicator: document.getElementById('statusIndicator'),
+            statusText: document.getElementById('statusText'),
+            modelInfo: document.getElementById('modelInfo'),
+            currentModel: document.getElementById('currentModel'),
+            selectionCount: document.getElementById('selectionCount'),
+            promptName: document.getElementById('promptName'),
+            savePromptBtn: document.getElementById('savePromptBtn'),
+            promptTemplates: document.querySelector('.prompt-templates'), // 获取提示词模板容器
+            quickSaveModelBtn: document.getElementById('quickSaveModelBtn'),
+            modelTemplates: document.querySelector('.model-templates'), // 获取模型模板容器
+            quickModelSelect: document.getElementById('quickModelSelect'), // 获取模型快速切换下拉框
+            quickPromptSelect: document.getElementById('quickPromptSelect') // 获取提示词快速切换下拉框
+        };
+
+        // 语言名称映射
+        const languageNames = {
+            'zh-CN': '简体中文',
+            'zh-TW': '繁体中文',
+            'en': 'English',
+            'ja': '日语 🇯🇵',
+            'ko': '韩语 🇰🇷',
+            'fr': '法语 🇫🇷',
+            'de': '德语 🇩🇪',
+            'es': '西班牙语 🇪🇸',
+            'ru': '俄语 🇷🇺',
+            'ar': '阿拉伯语 🇸🇦',
+            'pt': '葡萄牙语 🇵🇹',
+            'it': '意大利语 🇮🇹',
+            'nl': '荷兰语 🇳🇱',
+            'sv': '瑞典语 🇸🇪',
+            'da': '丹麦语 🇩🇰',
+            'no': '挪威语 🇳🇴',
+            'fi': '芬兰语 🇫🇮',
+            'pl': '波兰语 🇵🇱',
+            'cs': '捷克语 🇨🇿',
+            'hu': '匈牙利语 🇭🇺',
+            'tr': '土耳其语 🇹🇷',
+            'th': '泰语 🇹🇭',
+            'vi': '越南语 🇻🇳',
+            'hi': '印地语 🇮🇳',
+            'he': '希伯来语 🇮🇱',
+            'uk': '乌克兰语 🇺🇦'
+        };
+
+        // 显示状态消息
+        function showStatus(message, type = 'info') {
+            elements.status.className = `status ${type}`;
+            elements.status.textContent = message;
+            elements.status.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    elements.status.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // 更新配置状态显示
+        function updateConfigStatus() {
+            const isConfigured = config.apiUrl && config.apiKey;
+            if (isConfigured) {
+                elements.configStatus.className = 'config-status configured';
+                elements.statusIndicator.className = 'status-indicator configured';
+                elements.statusText.textContent = t('statusConfigured');
+                elements.modelInfo.classList.remove('hidden');
+                elements.currentModel.textContent = config.modelName;
+            } else {
+                elements.configStatus.className = 'config-status not-configured';
+                elements.statusIndicator.className = 'status-indicator';
+                elements.statusText.textContent = t('statusConfigNeeded');
+                elements.modelInfo.classList.add('hidden');
+            }
+        }
+
+        // 更新选中计数显示
+        function updateSelectionDisplay() {
+            elements.selectionCount.textContent = selectedCount;
+            
+            const hasConfig = config.apiUrl && config.apiKey && config.modelName;
+            elements.translateBtn.disabled = !hasConfig || selectedCount === 0 || isTranslating;
+        }
+
+        // 更新UI状态
+        function updateUI() {
+            updateConfigStatus();
+            updateSelectionDisplay();
+        }
+
+        // 显示设置弹窗
+        function showSettingsModal() {
+            elements.settingsModal.classList.add('show');
+            // 弹窗显示后调整高度
+            setTimeout(() => {
+                adjustUIHeight();
+            }, 300); // 等待动画完成
+        }
+
+        // 隐藏设置弹窗
+        function hideSettingsModal() {
+            elements.settingsModal.classList.remove('show');
+            // 弹窗隐藏后调整高度
+            setTimeout(() => {
+                adjustUIHeight();
+            }, 300); // 等待动画完成
+        }
+
+        // 加载配置
+        function loadConfig() {
+            parent.postMessage({ 
+                pluginMessage: { type: 'load-config' } 
+            }, '*');
+        }
+
+        // 保存配置
+        function saveConfig() {
+            config.apiUrl = elements.apiUrl.value.trim();
+            config.apiKey = elements.apiKey.value.trim();
+            config.modelName = elements.modelName.value.trim();
+            config.customPrompt = elements.customPrompt.value.trim();
+            
+            parent.postMessage({ 
+                pluginMessage: { 
+                    type: 'save-config',
+                    config: config
+                } 
+            }, '*');
+        }
+
+        // 保存语言设置
+        function saveLanguage() {
+            const newLanguage = elements.targetLanguage.value;
+            config.targetLanguage = newLanguage;
+            
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'save-language',
+                    language: newLanguage
+                }
+            }, '*');
+        }
+
+        // 开始翻译
+        function startTranslation() {
+            if (selectedCount === 0) return;
+            
+            if (isTranslating) {
+                // 停止翻译
+                parent.postMessage({ 
+                    pluginMessage: { type: 'stop-translation' } 
+                }, '*');
+                return;
+            }
+            
+            isTranslating = true;
+            elements.translateBtn.className = 'btn btn-stop';
+            elements.translateBtn.innerHTML = '<span class="loading"><span class="stop-spinner"></span>停止翻译</span>';
+            elements.progress.classList.remove('hidden');
+            elements.progressInfo.classList.remove('hidden');
+            elements.progressBar.style.width = '0%';
+            
+            parent.postMessage({ 
+                pluginMessage: { type: 'translate' } 
+            }, '*');
+        }
+
+        // 重置翻译按钮
+        function resetTranslateButton() {
+            isTranslating = false;
+            elements.translateBtn.disabled = false;
+            elements.translateBtn.innerHTML = `
+                <span class="material-symbols-outlined icon-small">rocket_launch</span>
+                <span data-i18n="startTranslation">${t('startTranslation')}</span>
+            `;
+            elements.progress.classList.add('hidden');
+            elements.progressInfo.classList.add('hidden');
+        }
+
+        // Prompt模板点击事件
+        function setupPromptTemplates() {
+            const promptTags = document.querySelectorAll('.prompt-tag');
+            promptTags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    const prompt = tag.getAttribute('data-prompt');
+                    elements.customPrompt.value = prompt;
+                });
+            });
+        }
+
+        // 保存自定义提示词
+        function saveCustomPrompt() {
+            const promptName = elements.promptName.value.trim();
+            const prompt = elements.customPrompt.value.trim();
+
+            if (!promptName || !prompt) {
+                showStatus(t('promptSavedFailed'), 'warning');
+                return;
+            }
+
+            // 发送消息到后端保存
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'save-custom-prompt',
+                    name: promptName,
+                    content: prompt
+                }
+            }, '*');
+
+            elements.promptName.value = ''; // 清空名称输入框
+        }
+
+        // 渲染自定义提示词模板
+        function renderCustomPrompts(customPrompts) {
+            const promptTemplates = document.querySelector('.prompt-templates');
+            // 移除所有自定义模板
+            const customTags = promptTemplates.querySelectorAll('.custom-prompt-tag');
+            customTags.forEach(tag => tag.remove());
+
+            // 添加自定义模板
+            if (customPrompts && customPrompts.length > 0) {
+                customPrompts.forEach(prompt => {
+                    const customTag = document.createElement('span');
+                    customTag.className = 'prompt-tag custom-prompt-tag';
+                    customTag.setAttribute('data-prompt', prompt.content);
+                    customTag.innerHTML = `
+                        ${prompt.name}
+                        <span class="delete-prompt" data-id="${prompt.id}">
+                            <span class="material-symbols-outlined icon-small">close</span>
+                        </span>
+                    `;
+                    
+                    // 点击模板使用提示词
+                    customTag.addEventListener('click', (e) => {
+                        if (!e.target.closest('.delete-prompt')) {
+                            elements.customPrompt.value = prompt.content;
+                        }
+                    });
+                    
+                    // 点击删除按钮
+                    const deleteBtn = customTag.querySelector('.delete-prompt');
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        deleteCustomPrompt(prompt.id);
+                    });
+                    
+                    promptTemplates.appendChild(customTag);
+                });
+            }
+        }
+
+        // 删除自定义提示词
+        function deleteCustomPrompt(promptId) {
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'delete-custom-prompt',
+                    id: promptId
+                }
+            }, '*');
+        }
+
+        // 保存自定义模型
+        function saveCustomModel() {
+            const modelName = elements.modelName.value.trim();
+
+            if (!modelName) {
+                showStatus(t('modelSavedFailed'), 'warning');
+                return;
+            }
+
+            // 检查是否已存在相同的模型
+            const existingModels = config.customModels || [];
+            const isDuplicate = existingModels.some(model => model.modelName === modelName);
+            
+            if (isDuplicate) {
+                showStatus(t('modelSavedDuplicate'), 'warning');
+                return;
+            }
+
+            // 发送消息到后端保存
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'save-custom-model',
+                    name: modelName, // 直接使用模型名称作为显示名称
+                    modelName: modelName
+                }
+            }, '*');
+        }
+
+        // 渲染自定义模型模板
+        function renderCustomModels(customModels) {
+            const modelTemplates = document.querySelector('.model-templates');
+            // 移除所有自定义模型
+            const customTags = modelTemplates.querySelectorAll('.custom-model-tag');
+            customTags.forEach(tag => tag.remove());
+
+            // 添加自定义模型
+            if (customModels && customModels.length > 0) {
+                customModels.forEach(model => {
+                    const customTag = document.createElement('span');
+                    customTag.className = 'model-tag custom-model-tag';
+                    customTag.setAttribute('data-model', model.modelName);
+                    customTag.innerHTML = `
+                        ${model.name}
+                        <span class="delete-model" data-id="${model.id}">
+                            <span class="material-symbols-outlined icon-small">close</span>
+                        </span>
+                    `;
+                    
+                    // 点击模型使用模型名称
+                    customTag.addEventListener('click', (e) => {
+                        if (!e.target.closest('.delete-model')) {
+                            elements.modelName.value = model.modelName;
+                        }
+                    });
+                    
+                    // 点击删除按钮
+                    const deleteBtn = customTag.querySelector('.delete-model');
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        deleteCustomModel(model.id);
+                    });
+                    
+                    modelTemplates.appendChild(customTag);
+                });
+            }
+        }
+
+        // 删除自定义模型
+        function deleteCustomModel(modelId) {
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'delete-custom-model',
+                    id: modelId
+                }
+            }, '*');
+        }
+
+        // 渲染快速切换模型下拉框
+        function renderQuickModelSelect() {
+            const quickModelSelect = elements.quickModelSelect;
+            
+            // 清空所有选项
+            quickModelSelect.innerHTML = '';
+            
+            // 添加默认模型选项
+            const defaultOption = document.createElement('option');
+            defaultOption.value = 'gpt-4.1-nano';
+            defaultOption.textContent = 'gpt-4.1-nano';
+            quickModelSelect.appendChild(defaultOption);
+            
+            // 添加自定义模型选项
+            if (config.customModels && config.customModels.length > 0) {
+                config.customModels.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model.modelName;
+                    option.textContent = model.name;
+                    quickModelSelect.appendChild(option);
+                });
+            }
+            
+            // 设置当前选中的模型
+            quickModelSelect.value = config.modelName || 'gpt-4.1-nano';
+        }
+
+        // 渲染快速切换提示词下拉框
+        function renderQuickPromptSelect() {
+            const quickPromptSelect = elements.quickPromptSelect;
+            
+            // 清空所有选项
+            quickPromptSelect.innerHTML = '';
+            
+            // 预设提示词映射
+            const defaultPrompts = {
+                'standard': {
+                    name: t('templateStandard'),
+                    content: t('promptContentStandard')
+                },
+                'localization': {
+                    name: t('templateLocalization'),
+                    content: t('promptContentLocalization')
+                },
+                'ui': {
+                    name: t('templateUI'),
+                    content: t('promptContentUI')
+                },
+                'technical': {
+                    name: t('templateTechnical'),
+                    content: t('promptContentTechnical')
+                }
+            };
+            
+            // 添加默认提示词选项
+            Object.keys(defaultPrompts).forEach(key => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = defaultPrompts[key].name;
+                option.setAttribute('data-prompt', defaultPrompts[key].content);
+                quickPromptSelect.appendChild(option);
+            });
+            
+            // 添加自定义提示词选项
+            if (config.customPrompts && config.customPrompts.length > 0) {
+                config.customPrompts.forEach(prompt => {
+                    const option = document.createElement('option');
+                    option.value = `custom_${prompt.id}`;
+                    option.textContent = `${prompt.name} (自定义)`;
+                    option.setAttribute('data-prompt', prompt.content);
+                    quickPromptSelect.appendChild(option);
+                });
+            }
+            
+            // 设置当前选中的提示词
+            const currentPrompt = config.customPrompt;
+            let selectedValue = 'standard'; // 默认选择标准翻译
+            
+            // 检查是否匹配预设提示词
+            for (const [key, prompt] of Object.entries(defaultPrompts)) {
+                if (prompt.content === currentPrompt) {
+                    selectedValue = key;
+                    break;
+                }
+            }
+            
+            // 检查是否匹配自定义提示词
+            if (config.customPrompts) {
+                const matchedCustom = config.customPrompts.find(p => p.content === currentPrompt);
+                if (matchedCustom) {
+                    selectedValue = `custom_${matchedCustom.id}`;
+                }
+            }
+            
+            quickPromptSelect.value = selectedValue;
+        }
+
+        // 切换模型
+        function switchModel(modelName) {
+            config.modelName = modelName;
+            elements.modelName.value = modelName;
+            
+            // 更新显示
+            elements.currentModel.textContent = modelName;
+            
+            // 通知主线程更新配置
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'update-config',
+                    config: config
+                }
+            }, '*');
+            
+            updateUI();
+            showStatus(t('modelSwitched', { modelName: modelName }), 'success');
+        }
+
+        // 切换提示词
+        function switchPrompt(promptValue, isCustom = false) {
+            if (isCustom) {
+                config.customPrompt = promptValue;
+                elements.customPrompt.value = promptValue;
+            } else {
+                // 获取默认提示词映射
+                const defaultPrompts = {
+                    'standard': {
+                        name: t('templateStandard'),
+                        content: t('promptContentStandard')
+                    },
+                    'localization': {
+                        name: t('templateLocalization'),
+                        content: t('promptContentLocalization')
+                    },
+                    'ui': {
+                        name: t('templateUI'),
+                        content: t('promptContentUI')
+                    },
+                    'technical': {
+                        name: t('templateTechnical'),
+                        content: t('promptContentTechnical')
+                    }
+                };
+                
+                if (defaultPrompts[promptValue]) {
+                    config.customPrompt = defaultPrompts[promptValue].content;
+                    elements.customPrompt.value = config.customPrompt;
+                }
+            }
+            
+            // 通知主线程更新配置
+            parent.postMessage({
+                pluginMessage: {
+                    type: 'update-config',
+                    config: config
+                }
+            }, '*');
+            
+            showStatus(t('promptSwitched'), 'success');
+        }
+
+        // 初始化快速切换下拉框的事件监听
+        function initQuickSwitchEvents() {
+            // 模型下拉框变化事件
+            elements.quickModelSelect.addEventListener('change', (e) => {
+                switchModel(e.target.value);
+            });
+            
+            // 提示词下拉框变化事件
+            elements.quickPromptSelect.addEventListener('change', (e) => {
+                switchPrompt(e.target.value);
+            });
+        }
+
+        // 事件监听
+        elements.saveConfig.addEventListener('click', saveConfig);
+        elements.translateBtn.addEventListener('click', startTranslation);
+        elements.settingsToggle.addEventListener('click', showSettingsModal);
+        elements.closeModal.addEventListener('click', hideSettingsModal);
+        elements.targetLanguage.addEventListener('change', saveLanguage);
+        elements.savePromptBtn.addEventListener('click', saveCustomPrompt);
+        elements.quickSaveModelBtn.addEventListener('click', saveCustomModel); // 添加快速保存按钮事件
+
+        // 为模型输入框添加回车键快速保存
+        elements.modelName.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveCustomModel();
+            }
+        });
+
+        // 点击遮罩关闭弹窗
+        elements.settingsModal.addEventListener('click', (e) => {
+            if (e.target === elements.settingsModal) {
+                hideSettingsModal();
+            }
+        });
+
+        // ESC键关闭弹窗
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && elements.settingsModal.classList.contains('show')) {
+                hideSettingsModal();
+            }
+        });
+
+        // 消息处理
+        window.onmessage = (event) => {
+            const msg = event.data.pluginMessage;
+            
+            switch (msg.type) {
+                case 'config-loaded':
+                    config = { ...config, ...msg.config };
+                    updateUI();
+                    break;
+                    
+                case 'config-saved':
+                    showStatus(t('configSaved'), 'success');
+                    updateUI();
+                    // 更新快速切换区域
+                    renderQuickModelSelect();
+                    renderQuickPromptSelect();
+                    break;
+
+                case 'language-saved':
+                    showStatus(t('languageSwitched', { language: t('languages.' + msg.language) }), 'success');
+                    break;
+                    
+                case 'selection-changed':
+                    selectedCount = msg.count;
+                    elements.selectionCount.textContent = selectedCount;
+                    elements.translateBtn.disabled = selectedCount === 0 || !config.apiUrl || !config.apiKey;
+                    break;
+                    
+                case 'translation-started':
+                    isTranslating = true;
+                    elements.translateBtn.disabled = false;
+                    elements.translateBtn.innerHTML = `
+                        <span class="material-symbols-outlined icon-small">stop</span>
+                        <span data-i18n="stopTranslation">${t('stopTranslation')}</span>
+                    `;
+                    elements.progress.classList.remove('hidden');
+                    elements.progressInfo.classList.remove('hidden');
+                    showStatus(t('translationStarted'), 'info');
+                    break;
+
+                case 'translation-stopped':
+                    showStatus(t('translationStopping'), 'warning');
+                    elements.translateBtn.innerHTML = `<span class="loading"><span class="stop-spinner"></span>${t('statusStopping')}</span>`;
+                    break;
+
+                case 'translation-stopped-complete':
+                    resetTranslateButton();
+                    showStatus(t('translationStopped', { completed: msg.completed, total: msg.total }), 'warning');
+                    break;
+                    
+                case 'translation-progress':
+                    elements.progressBar.style.width = `${msg.progress}%`;
+                    let progressText;
+                    
+                    if (msg.status === 'processing') {
+                        progressText = t('progressProcessingDetail', { 
+                            completed: msg.completed, 
+                            total: msg.total, 
+                            currentText: msg.currentText 
+                        });
+                    } else if (msg.currentText) {
+                        progressText = t('progressTranslatingDetail', { 
+                            completed: msg.completed, 
+                            total: msg.total, 
+                            progress: msg.progress, 
+                            currentText: msg.currentText 
+                        });
+                    } else {
+                        progressText = t('progressTranslatingSimple', { 
+                            completed: msg.completed, 
+                            total: msg.total, 
+                            progress: msg.progress 
+                        });
+                    }
+                    
+                    elements.progressInfo.textContent = progressText;
+                    break;
+                    
+                case 'translation-completed':
+                    resetTranslateButton();
+                    const message = msg.hasError 
+                        ? t('translationCompletedPartial', { completed: msg.completed, total: msg.total })
+                        : t('translationCompletedAll');
+                    showStatus(message, msg.hasError ? 'warning' : 'success');
+                    break;
+                    
+                case 'error':
+                    resetTranslateButton();
+                    showStatus(msg.message, 'error');
+                    break;
+
+                case 'custom-prompt-saved':
+                    showStatus(t('promptSaved', { name: msg.name }), 'success');
+                    renderCustomPrompts(msg.prompts);
+                    // 更新本地config中的自定义提示词数据
+                    config.customPrompts = msg.prompts;
+                    // 更新快速切换提示词下拉框
+                    renderQuickPromptSelect();
+                    break;
+
+                case 'custom-prompt-deleted':
+                    showStatus(t('promptDeleted', { name: msg.name }), 'success');
+                    renderCustomPrompts(msg.prompts);
+                    // 更新本地config中的自定义提示词数据
+                    config.customPrompts = msg.prompts;
+                    // 更新快速切换提示词下拉框
+                    renderQuickPromptSelect();
+                    break;
+
+                case 'custom-model-saved':
+                    showStatus(t('modelSaved', { name: msg.name }), 'success');
+                    renderCustomModels(msg.models);
+                    // 更新本地config中的自定义模型数据
+                    config.customModels = msg.models;
+                    // 更新快速切换模型下拉框
+                    renderQuickModelSelect();
+                    break;
+
+                case 'custom-model-deleted':
+                    showStatus(t('modelDeleted', { name: msg.name }), 'success');
+                    renderCustomModels(msg.models);
+                    // 更新本地config中的自定义模型数据
+                    config.customModels = msg.models;
+                    // 更新快速切换模型下拉框
+                    renderQuickModelSelect();
+                    break;
+            }
+        };
+
+        // 初始化
+        updateUI();
+        setupPromptTemplates();
+        initQuickSwitchEvents();
+        initLanguage(); // 初始化语言设置
+        loadConfig(); // 加载配置
+    </script>
+</body>
+</html> 
