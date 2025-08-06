@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>lumitrans</title>
     
+    <!-- Google Material Symbols 字体引用 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
     <!-- 多语言数据 -->
     <script>
         // 语言文件
         const i18nData = {
             'zh-CN': {
                 // 主界面
-                title: 'LUMI翻译助手',
+                title: 'lumitrans翻译助手',
                 settings: '设置',
                 selectedText: '个文本图层已选中',
                 targetLanguage: '翻译目标语言',
@@ -117,7 +120,7 @@
             
             'en': {
                 // Main interface
-                title: 'LUMI Translator',
+                title: 'lumitrans Translator',
                 settings: 'Settings',
                 selectedText: 'text layers selected',
                 targetLanguage: 'Target Language',
@@ -223,7 +226,7 @@
             
             'ja': {
                 // メインインターフェース
-                title: 'LUMI翻訳アシスタント',
+                title: 'lumitrans翻訳アシスタント',
                 settings: '設定',
                 selectedText: 'のテキストレイヤーが選択されています',
                 targetLanguage: '翻訳先言語',
@@ -1532,7 +1535,7 @@
         <!-- 头部区域 -->
         <div class="header">
             <div class="title">
-                <img src="https://i.ibb.co/svMdf5c3/Lumitranslogo-4x.png" alt="LUMI Logo" style="width: 120px; height: 40px; object-fit: contain;">
+                <img src="https://i.ibb.co/svMdf5c3/Lumitranslogo-4x.png" alt="lumitrans Logo" style="width: 120px; height: 40px; object-fit: contain;">
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
                 <!-- 语言切换 -->
@@ -2458,8 +2461,8 @@
         initLanguage(); // 初始化语言设置
         
         // 添加调试功能到全局作用域
-        window.debugLUMI = function() {
-            console.log('=== LUMI 调试信息 ===');
+        window.debugLumitrans = function() {
+            console.log('=== lumitrans 调试信息 ===');
             console.log('当前配置:', config);
             console.log('自定义模型:', config.customModels);
             console.log('自定义提示词:', config.customPrompts);
