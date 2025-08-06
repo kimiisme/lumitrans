@@ -3,9 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LUMI多语言AI翻译助手</title>
-    <!-- Google Material Symbols -->
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <title>lumitrans</title>
     
     <!-- 多语言数据 -->
     <script>
@@ -545,10 +543,10 @@
             height: auto;
             overflow-y: auto;
             box-sizing: border-box;
+            background-color: #f3f3f3;
         }
 
         .container {
-            background: white;
             border-radius: 8px;
             height: auto;
             min-height: 100%;
@@ -556,11 +554,28 @@
             flex-direction: column;
         }
 
+        .main-content {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-bottom: 16px;
+            padding: 12px 12px;
+            border-radius: 2px;
+            background-color: #e9e9e9;
+        }
+
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
         }
 
         .title {
@@ -573,16 +588,15 @@
         }
 
         .settings-btn {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
+            border: 0px solid #dee2e6;
+            border-radius: 0;
             padding: 4px 4px;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             gap: 4px;
-            font-size: 11px;
+            font-size: 12px;
             color: #666;
         }
 
@@ -593,7 +607,7 @@
 
         .settings-btn.active {
             background: #007AFF;
-            color: white;
+            color: rgb(80, 80, 80);
             border-color: #007AFF;
         }
 
@@ -634,24 +648,27 @@
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1.5 4.5h9L6 9z'/%3E%3C/svg%3E");
+            background-image: none;
             background-repeat: no-repeat;
             background-position: right 12px center;
             background-size: 12px;
             cursor: pointer;
             font-weight: 500;
+            border: none;
+            background: transparent;
+            box-shadow: none;
         }
 
         select:hover {
             border-color: #007AFF;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23007AFF' d='M6 9L1.5 4.5h9L6 9z'/%3E%3C/svg%3E");
+            background-image: none;
         }
 
         select:focus {
             outline: none;
             border-color: #007AFF;
-            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23007AFF' d='M6 9L1.5 4.5h9L6 9z'/%3E%3C/svg%3E");
+            box-shadow: none;
+            background-image: none;
         }
 
         /* 下拉选项样式 */
@@ -661,6 +678,7 @@
             font-weight: 400;
             background: white;
             color: #333;
+            text-align: center;
         }
 
         select option:hover {
@@ -727,13 +745,36 @@
         }
 
         .btn-primary {
-            background: #007AFF;
+            background: linear-gradient(135deg, #002fff 0%, #8000ff 25%, #e600ff 50%, #ff0022 75%, #ffc400 100%);
+            background-size: 200% 200%;
             color: white;
-            font-size: 16px;
+            font-size: 18px;
+            font-weight: medium;
+            animation: gradientShift 3s ease infinite;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover:not(:disabled) {
-            background: #0056CC;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 200% 200%;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+            animation: gradientShift 2s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .btn-danger {
@@ -754,7 +795,7 @@
         }
 
         .btn-secondary:hover:not(:disabled) {
-            background: #e9ecef;
+            background: #2c99ff;
         }
 
         .btn:disabled {
@@ -905,7 +946,7 @@
             min-height: 300px;
             max-height: 85vh;
             height: auto;
-            overflow-y: auto;
+            overflow: hidden;  /* 改为hidden，让内部控制滚动 */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             transform: scale(0.7);
             transition: transform 0.3s ease;
@@ -923,6 +964,7 @@
             justify-content: space-between;
             padding: 20px 24px 16px;
             border-bottom: 1px solid #e9ecef;
+            flex-shrink: 0;  /* 防止收缩 */
         }
 
         .modal-title {
@@ -955,15 +997,45 @@
         }
 
         .modal-body {
-            padding: 24px;
+            padding: 24px 24px 12px 24px;  /* 减少底部内边距 */
             flex: 1;
             overflow-y: auto;
             min-height: 0;
         }
 
-        .modal-body .btn {
+        /* 新增：模态框底部固定区域 */
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #e9ecef;
+            background: #f8f9fa;
+            flex-shrink: 0;  /* 防止收缩 */
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .modal-footer .btn {
             width: 100%;
-            margin-top: 8px;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4facfe 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .modal-footer .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        /* 移除原来modal-body中的按钮样式 */
+        .modal-body .btn {
+            width: auto;
+            margin-top: 0;
         }
 
         .config-status {
@@ -971,9 +1043,9 @@
             align-items: center;
             gap: 4px;
             padding: 4px 8px;
-            background: #f8f9fa;
-            border-radius: 50px;
-            font-size: 11px;
+            background: #fff3cd;
+            border-radius: 16px;
+            font-size: 10px;
         }
 
         .config-status.configured {
@@ -1000,52 +1072,52 @@
         .model-info {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 3px 12px;
+            gap: 6px;
+            padding: 3px 10px;
             background: #f3e5f5;
-            border-radius: 50px;
-            font-size: 12px;
+            border-radius: 16px;
+            font-size: 10px;
             color: #4a148c;
         }
 
         .language-section {
-            background: #fff;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 20px;
+            background: none;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            margin: 0;
         }
 
         .language-title {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 12px;
+            color: #333;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .information{
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
         }
 
         .selection-info {
-            background: #e8f4fd;
-            border: 1px solid #bee5eb;
-            border-radius: 6px;
-            padding: 24px;
-            text-align: center;
-            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
         }
 
         .selection-count {
             font-size: 24px;
             font-weight: 700;
             color: #007AFF;
-            margin-bottom: 4px;
         }
 
         .selection-text {
@@ -1053,9 +1125,20 @@
             color: #666;
         }
 
+        .status-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 4px;
+            border-radius: 16px;
+            background-color: #ffffff;
+            margin-bottom: 12px;
+        }
+
         .translate-section {
             display: flex;
             align-items: center;
+            margin-bottom: 16px;
         }
 
         .progress-info {
@@ -1175,6 +1258,7 @@
 
         .custom-prompt-tag:hover {
             background: #cce5ff;
+            color: #0056b3;
             transform: translateY(-1px);
         }
 
@@ -1315,27 +1399,131 @@
         /* 快速切换区域样式 */
         .quick-switch-section {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 16px 0 20px;
-            padding: 16px;
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding: 0;
+            background: none;
+            border: none;
+            border-radius: 0;
         }
 
         .quick-switch-item {
+            flex: 1;
             text-align: left;
         }
 
         .quick-switch-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 4px;
+        }
+
+        /* 下拉框基础样式 */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 8px 32px 8px 12px;
+            font-size: 13px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-image: none;
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 12px;
+        }
+
+        select:hover {
+            border-color: #adb5bd;
+            background-color: #f1f3f5;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #4dabf7;
+            box-shadow: none;
+            background-color: #fff;
+        }
+
+        /* 下拉选项样式 */
+        select option {
+            background: #fff;
+            color: #333;
+            padding: 8px;
+            font-size: 13px;
+            border: none;
+            text-align: center;
+        }
+
+        select option:hover {
+            background: #e7f5ff;
+        }
+
+        select option:checked {
+            background: #339af0;
+            color: white;
+        }
+
+        /* 带图标的下拉框容器 */
+        .select-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .select-container select {
+            width: 100%;
+            padding-left: 12px;
+        }
+
+        .select-icon {
+            position: absolute;
+            left: 10px;
+            color: #666;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .select-container:hover .select-icon {
+            color: #333;
+        }
+
+        .select-container select:focus + .select-icon,
+        .select-container select:focus ~ .select-icon {
+            color: #339af0;
+        }
+
+        /* 界面语言选择器特殊样式 */
+        #uiLanguage {
+            padding: 0 0;
+            font-size: 14px;
+            color: #757575;
+            text-align: center;
+            background-image: none;  /* 移除下拉箭头 */
+            border: none;  /* 移除边框 */
+            background: transparent;  /* 移除背景色 */
+        }
+
+        #uiLanguage:hover, #uiLanguage:focus {
+            background: transparent;  /* 保持透明背景 */
+            border: none;  /* 保持无边框 */
+            box-shadow: none;  /* 移除焦点阴影 */
+        }
+
+        #uiLanguage option {
+            font-size: 16px;
+            text-align: center;
+            background: #ffffff;
+            padding: 8px;
         }
     </style>
 </head>
@@ -1344,113 +1532,110 @@
         <!-- 头部区域 -->
         <div class="header">
             <div class="title">
-                <span class="material-symbols-outlined">translate</span>
-                <span data-i18n="title">LUMI翻译助手</span>
+                <img src="https://i.ibb.co/svMdf5c3/Lumitranslogo-4x.png" alt="LUMI Logo" style="width: 120px; height: 40px; object-fit: contain;">
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
                 <!-- 语言切换 -->
-                <select id="uiLanguage" onchange="changeLanguage(this.value)" style="display: flex; width: auto; padding: 6px 8px; font-size: 11px; border: 1px solid #dee2e6; border-radius: 4px; background: #f8f9fa;">
-                    <option value="zh-CN">中文</option>
-                    <option value="en">English</option>
-                    <option value="ja">日本語</option>
+                <select id="uiLanguage" onchange="changeLanguage(this.value)">
+                    <option value="zh-CN">🇨🇳</option>
+                    <option value="en">🇺🇸</option>
+                    <option value="ja">🇯🇵</option>
                 </select>
                 <button class="settings-btn" id="settingsToggle">
                     <span class="material-symbols-outlined icon-small">settings</span>
                 </button>
             </div>
         </div>
-
-        <!-- 选中文本信息 -->
-        <div class="selection-info">
-            <div class="selection-count" id="selectionCount">0</div>
-            <div class="selection-text" data-i18n="selectedText">个文本图层已选中</div>
-        </div>
-
-        <!-- 目标语言选择 -->
-        <div class="language-section">
-            <div class="language-title">
-                <span class="material-symbols-outlined icon-small">language</span>
-                <span data-i18n="targetLanguage">翻译目标语言</span>
+        <div class="status-row">
+            <!-- 配置状态显示 -->
+            <div id="configStatus" class="config-status not-configured">
+                <div class="status-indicator" id="statusIndicator"></div>
+                <span id="statusText" data-i18n="statusConfigNeeded">请先配置API设置</span>
             </div>
-            <div class="form-group">
-                <div class="select-container">
-                    <span class="material-symbols-outlined icon-small select-icon">public</span>
-                    <select id="targetLanguage">
-                        <option value="zh-CN">简体中文 🇨🇳</option>
-                        <option value="zh-TW">繁体中文 🇹🇼</option>
-                        <option value="en">英语 🇺🇸</option>
-                        <option value="ja">日语 🇯🇵</option>
-                        <option value="ko">韩语 🇰🇷</option>
-                        <option value="fr">法语 🇫🇷</option>
-                        <option value="de">德语 🇩🇪</option>
-                        <option value="es">西班牙语 🇪🇸</option>
-                        <option value="ru">俄语 🇷🇺</option>
-                        <option value="ar">阿拉伯语 🇸🇦</option>
-                        <option value="pt">葡萄牙语 🇵🇹</option>
-                        <option value="it">意大利语 🇮🇹</option>
-                        <option value="nl">荷兰语 🇳🇱</option>
-                        <option value="sv">瑞典语 🇸🇪</option>
-                        <option value="da">丹麦语 🇩🇰</option>
-                        <option value="no">挪威语 🇳🇴</option>
-                        <option value="fi">芬兰语 🇫🇮</option>
-                        <option value="pl">波兰语 🇵🇱</option>
-                        <option value="cs">捷克语 🇨🇿</option>
-                        <option value="hu">匈牙利语 🇭🇺</option>
-                        <option value="tr">土耳其语 🇹🇷</option>
-                        <option value="th">泰语 🇹🇭</option>
-                        <option value="vi">越南语 🇻🇳</option>
-                        <option value="hi">印地语 🇮🇳</option>
-                        <option value="he">希伯来语 🇮🇱</option>
-                        <option value="uk">乌克兰语 🇺🇦</option>
-                    </select>
-                </div>
-            </div>
-            <div class="information">
-                <!-- 配置状态显示 -->
-                <div id="configStatus" class="config-status not-configured">
-                    <div class="status-indicator" id="statusIndicator"></div>
-                    <span id="statusText" data-i18n="statusConfigNeeded">请先配置API设置</span>
-                </div>
-
-                <div id="modelInfo" class="model-info hidden">
-                    <span class="material-symbols-outlined icon-small">smart_toy</span>
-                    <span id="currentModel">gpt-4.1-nano</span>
-                </div>
+            <div id="modelInfo" class="model-info hidden">
+                <span class="material-symbols-outlined icon-small">smart_toy</span>
+                <span id="currentModel">gpt-4.1-nano</span>
             </div>
         </div>
-
-        <!-- 快速切换区域 -->
-        <div class="quick-switch-section">
-            <!-- 模型快速切换 -->
-            <div class="quick-switch-item">
-                <div class="quick-switch-title">
-                    <span class="material-symbols-outlined icon-small">smart_toy</span>
-                    <span data-i18n="model">模型</span>
+        <!-- 主要内容区 -->
+        <div class="main-content">
+            <!-- 信息行：选中文本数量 + 状态信息 -->
+            <div class="info-row">
+                <div class="selection-info">
+                    <div class="selection-count" id="selectionCount">0</div>
+                    <div class="selection-text" data-i18n="selectedText">个文本图层已选中</div>
                 </div>
-                <div class="select-container">
-                    <span class="material-symbols-outlined icon-small select-icon">smart_toy</span>
-                    <select id="quickModelSelect">
-                        <option value="gpt-4.1-nano">gpt-4.1-nano</option>
-                        <!-- 自定义模型选项将动态插入 -->
-                    </select>
+                
+            </div>
+
+            <!-- 目标语言选择 -->
+            <div class="language-section">
+                <div class="language-title">
+                    <span data-i18n="targetLanguage">翻译目标语言</span>
+                </div>
+                <div class="form-group">
+                    <div class="select-container">
+                        <select id="targetLanguage">
+                            <option value="zh-CN">简体中文 🇨🇳</option>
+                            <option value="zh-TW">繁体中文 🇹🇼</option>
+                            <option value="en">英语 🇺🇸</option>
+                            <option value="ja">日语 🇯🇵</option>
+                            <option value="ko">韩语 🇰🇷</option>
+                            <option value="fr">法语 🇫🇷</option>
+                            <option value="de">德语 🇩🇪</option>
+                            <option value="es">西班牙语 🇪🇸</option>
+                            <option value="ru">俄语 🇷🇺</option>
+                            <option value="ar">阿拉伯语 🇸🇦</option>
+                            <option value="pt">葡萄牙语 🇵🇹</option>
+                            <option value="it">意大利语 🇮🇹</option>
+                            <option value="nl">荷兰语 🇳🇱</option>
+                            <option value="sv">瑞典语 🇸🇪</option>
+                            <option value="da">丹麦语 🇩🇰</option>
+                            <option value="no">挪威语 🇳🇴</option>
+                            <option value="fi">芬兰语 🇫🇮</option>
+                            <option value="pl">波兰语 🇵🇱</option>
+                            <option value="cs">捷克语 🇨🇿</option>
+                            <option value="hu">匈牙利语 🇭🇺</option>
+                            <option value="tr">土耳其语 🇹🇷</option>
+                            <option value="th">泰语 🇹🇭</option>
+                            <option value="vi">越南语 🇻🇳</option>
+                            <option value="hi">印地语 🇮🇳</option>
+                            <option value="he">希伯来语 🇮🇱</option>
+                            <option value="uk">乌克兰语 🇺🇦</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <!-- 提示词模板快速切换 -->
-            <div class="quick-switch-item">
-                <div class="quick-switch-title">
-                    <span class="material-symbols-outlined icon-small">psychology</span>
-                    <span data-i18n="promptTemplate">提示词模板</span>
+            <!-- 快速切换区域 -->
+            <div class="quick-switch-section">
+                <!-- 模型快速切换 -->
+                <div class="quick-switch-item">
+                    <div class="quick-switch-title">
+                        <span data-i18n="model">模型</span>
+                    </div>
+                    <div class="select-container">
+                        <select id="quickModelSelect">
+                            <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                            <!-- 自定义模型选项将动态插入 -->
+                        </select>
+                    </div>
                 </div>
-                <div class="select-container">
-                    <span class="material-symbols-outlined icon-small select-icon">edit_note</span>
-                    <select id="quickPromptSelect">
-                        <option value="standard" data-i18n="templateStandard">标准翻译</option>
-                        <option value="localization" data-i18n="templateLocalization">本地化</option>
-                        <option value="ui" data-i18n="templateUI">界面文案</option>
-                        <option value="technical" data-i18n="templateTechnical">技术文档</option>
-                        <!-- 自定义提示词选项将动态插入 -->
-                    </select>
+
+                <!-- 提示词模板快速切换 -->
+                <div class="quick-switch-item">
+                    <div class="quick-switch-title">
+                        <span data-i18n="promptTemplate">提示词模板</span>
+                    </div>
+                    <div class="select-container">
+                        <select id="quickPromptSelect">
+                            <option value="standard" data-i18n="templateStandard">标准翻译</option>
+                            <option value="localization" data-i18n="templateLocalization">本地化</option>
+                            <option value="ui" data-i18n="templateUI">界面文案</option>
+                            <option value="technical" data-i18n="templateTechnical">技术文档</option>
+                            <!-- 自定义提示词选项将动态插入 -->
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1458,7 +1643,6 @@
         <!-- 翻译部分 -->
         <div class="translate-section">
             <button class="btn btn-primary" id="translateBtn" disabled>
-                <span class="material-symbols-outlined icon-small">rocket_launch</span>
                 <span data-i18n="startTranslation">开始翻译</span>
             </button>
             
@@ -1519,7 +1703,6 @@
                             <input type="text" id="promptName" data-i18n-placeholder="placeholderPromptName" placeholder="为此提示词命名..." maxlength="20">
                             <button class="btn-save-prompt" id="savePromptBtn">
                                 <span class="material-symbols-outlined icon-small">bookmark_add</span>
-                                <span data-i18n="save">保存</span>
                             </button>
                         </div>
                     </div>
@@ -1532,8 +1715,11 @@
                         <!-- 自定义模板将动态插入到这里 -->
                     </div>
                 </div>
-                
-                <button class="btn btn-secondary" id="saveConfig">
+            </div>
+            
+            <!-- 模态框底部固定保存按钮 -->
+            <div class="modal-footer">
+                <button class="btn" id="saveConfig">
                     <span class="material-symbols-outlined icon-small">save</span>
                     <span data-i18n="save">保存</span>
                 </button>
@@ -2118,8 +2304,30 @@
             
             switch (msg.type) {
                 case 'config-loaded':
+                    console.log('收到config-loaded消息:', msg.config);
                     config = { ...config, ...msg.config };
+                    console.log('合并后的配置:', config);
+                    
+                    // 填充表单字段
+                    if (elements.apiUrl) elements.apiUrl.value = config.apiUrl || '';
+                    if (elements.apiKey) elements.apiKey.value = config.apiKey || '';
+                    if (elements.modelName) elements.modelName.value = config.modelName || 'gpt-4.1-nano';
+                    if (elements.customPrompt) elements.customPrompt.value = config.customPrompt || '';
+                    if (elements.targetLanguage) elements.targetLanguage.value = config.targetLanguage || 'zh-CN';
+                    
                     updateUI();
+                    // 渲染自定义模型和提示词
+                    if (config.customModels) {
+                        console.log('开始渲染自定义模型:', config.customModels);
+                        renderCustomModels(config.customModels);
+                    }
+                    if (config.customPrompts) {
+                        console.log('开始渲染自定义提示词:', config.customPrompts);
+                        renderCustomPrompts(config.customPrompts);
+                    }
+                    // 更新快速切换区域
+                    renderQuickModelSelect();
+                    renderQuickPromptSelect();
                     break;
                     
                 case 'config-saved':
@@ -2128,6 +2336,8 @@
                     // 更新快速切换区域
                     renderQuickModelSelect();
                     renderQuickPromptSelect();
+                    // 保存成功后自动关闭设置模态框
+                    hideSettingsModal();
                     break;
 
                 case 'language-saved':
@@ -2246,7 +2456,45 @@
         setupPromptTemplates();
         initQuickSwitchEvents();
         initLanguage(); // 初始化语言设置
+        
+        // 添加调试功能到全局作用域
+        window.debugLUMI = function() {
+            console.log('=== LUMI 调试信息 ===');
+            console.log('当前配置:', config);
+            console.log('自定义模型:', config.customModels);
+            console.log('自定义提示词:', config.customPrompts);
+            
+            // 尝试直接从localStorage读取数据
+            try {
+                const storedData = localStorage.getItem('lumi-config');
+                console.log('localStorage中的原始数据:', storedData);
+                if (storedData) {
+                    const parsedData = JSON.parse(storedData);
+                    console.log('解析后的数据:', parsedData);
+                }
+            } catch (e) {
+                console.error('读取localStorage失败:', e);
+            }
+        };
+        
         loadConfig(); // 加载配置
+        
+        // 延迟渲染确保配置已加载
+        setTimeout(() => {
+            console.log('延迟渲染执行中...');
+            console.log('当前config:', config);
+            
+            if (config.customModels && config.customModels.length > 0) {
+                console.log('渲染自定义模型:', config.customModels);
+                renderCustomModels(config.customModels);
+            }
+            if (config.customPrompts && config.customPrompts.length > 0) {
+                console.log('渲染自定义提示词:', config.customPrompts);
+                renderCustomPrompts(config.customPrompts);
+            }
+            renderQuickModelSelect();
+            renderQuickPromptSelect();
+        }, 500);
     </script>
 </body>
 </html> 

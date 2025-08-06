@@ -1,7 +1,7 @@
 // 显示插件界面
 figma.showUI(__html__, { 
   width: 400, 
-  title: "LUMI多语言AI翻译助手"
+  title: "lumitrans"
 });
 
 // 初始设置合适的高度
