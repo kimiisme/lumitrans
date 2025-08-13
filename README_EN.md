@@ -102,8 +102,8 @@ The plugin interface now supports multiple languages:
 
 If you encounter any issues or have suggestions for improvement, please contact us through:
 
-- 📝 [Submit Issue](https://github.com/kimigs/lumitrans-Multilingual-AI-Translator/issues)
-- ✉️ Send feedback email
+- 📝 [Submit Issue](https://github.com/kimiisme/lumitrans/issues)
+- ✉️ [Send feedback email](mailto:Kimishi<kimiisme2@mail.com)
 
 ## 📄 License
 
