@@ -5,28 +5,53 @@ figma.showUI(__html__, {
 });
 
 // 初始设置合适的高度
-figma.ui.resize(400, 500);
+figma.ui.resize(400, 200);
 
 // 全局变量
 let isTranslationStopped = false;
 
+// 发送日志到UI
+function sendLog(message, type = 'info') {
+  figma.ui.postMessage({
+    type: 'log',
+    message,
+    logType: type
+  });
+}
+
 // 从客户端存储加载配置
 async function loadConfig() {
-  const savedConfig = await figma.clientStorage.getAsync('translatorConfig');
-  return savedConfig || {
-    apiUrl: '',
-    apiKey: '',
-    modelName: 'gpt-4.1-nano',
-    targetLanguage: 'zh-CN',
-    customPrompt: '你是一个专业的翻译助手。请将用户提供的文本翻译成{targetLanguage}。只返回翻译结果，不要添加任何解释或其他内容。',
-    customPrompts: [], // 用户自定义提示词模板列表
-    customModels: [] // 用户自定义模型列表
-  };
+  try {
+    const savedConfig = await figma.clientStorage.getAsync('translatorConfig');
+    if (savedConfig) {
+      sendLog('配置加载成功', 'info');
+    } else {
+      sendLog('使用默认配置', 'info');
+    }
+    return savedConfig || {
+      apiUrl: '',
+      apiKey: '',
+      modelName: 'gpt-4.1-nano',
+      targetLanguage: 'zh-CN',
+      customPrompt: '你是一个专业的翻译助手。请将用户提供的文本翻译成{targetLanguage}。只返回翻译结果，不要添加任何解释或其他内容。',
+      customPrompts: [],
+      customModels: []
+    };
+  } catch (error) {
+    sendLog(`配置加载失败: ${error.message}`, 'error');
+    throw error;
+  }
 }
 
 // 保存配置到客户端存储
 async function saveConfig(config) {
-  await figma.clientStorage.setAsync('translatorConfig', config);
+  try {
+    await figma.clientStorage.setAsync('translatorConfig', config);
+    sendLog('配置保存成功', 'success');
+  } catch (error) {
+    sendLog(`配置保存失败: ${error.message}`, 'error');
+    throw error;
+  }
 }
 
 // 获取选中的文本节点
@@ -76,6 +101,7 @@ figma.ui.onmessage = async (msg) => {
         figma.ui.postMessage({
           type: 'config-saved'
         });
+        sendLog('API配置已更新', 'success');
         break;
 
       case 'save-language':
@@ -86,6 +112,7 @@ figma.ui.onmessage = async (msg) => {
           type: 'language-saved',
           language: msg.language
         });
+        sendLog(`目标语言已切换为: ${getLanguageName(msg.language)}`, 'info');
         break;
 
       case 'save-custom-prompt':
@@ -103,6 +130,7 @@ figma.ui.onmessage = async (msg) => {
           name: msg.name,
           prompts: savePromptConfig.customPrompts
         });
+        sendLog(`新建提示词模板: ${msg.name}`, 'success');
         break;
 
       case 'delete-custom-prompt':
@@ -115,6 +143,7 @@ figma.ui.onmessage = async (msg) => {
           name: promptToDelete ? promptToDelete.name : '未知',
           prompts: deletePromptConfig.customPrompts
         });
+        sendLog(`删除提示词模板: ${promptToDelete ? promptToDelete.name : '未知'}`, 'info');
         break;
 
       case 'save-custom-model':
@@ -132,6 +161,7 @@ figma.ui.onmessage = async (msg) => {
           name: msg.name,
           models: saveModelConfig.customModels
         });
+        sendLog(`新建模型: ${msg.name}`, 'success');
         break;
 
       case 'delete-custom-model':
@@ -144,6 +174,7 @@ figma.ui.onmessage = async (msg) => {
           name: modelToDelete ? modelToDelete.name : '未知',
           models: deleteModelConfig.customModels
         });
+        sendLog(`删除模型: ${modelToDelete ? modelToDelete.name : '未知'}`, 'info');
         break;
         
       case 'get-selected-text':
@@ -155,11 +186,13 @@ figma.ui.onmessage = async (msg) => {
         figma.ui.postMessage({
           type: 'translation-stopped'
         });
+        sendLog('手动停止翻译', 'warning');
         break;
         
       case 'translate':
         const selectedNodes = getSelectedTextNodes();
         if (selectedNodes.length === 0) {
+          sendLog('未选择任何文本图层', 'warning');
           figma.ui.postMessage({
             type: 'error',
             message: '请先选择包含文本的图层'
@@ -174,9 +207,11 @@ figma.ui.onmessage = async (msg) => {
         figma.ui.postMessage({
           type: 'translation-started'
         });
+        sendLog(`开始翻译 ${selectedNodes.length} 个文本图层`, 'info');
         
         const translationConfig = await loadConfig();
         if (!translationConfig.apiUrl || !translationConfig.apiKey) {
+          sendLog('API配置缺失', 'error');
           figma.ui.postMessage({
             type: 'error',
             message: '请先配置API地址和API Key'
@@ -204,6 +239,7 @@ figma.ui.onmessage = async (msg) => {
               completed: completedCount,
               total: selectedNodes.length
             });
+            sendLog(`翻译已停止，已完成 ${completedCount}/${selectedNodes.length} 个文本`, 'warning');
             return;
           }
           
@@ -234,6 +270,7 @@ figma.ui.onmessage = async (msg) => {
                 completed: completedCount,
                 total: selectedNodes.length
               });
+              sendLog(`翻译已停止，已完成 ${completedCount}/${selectedNodes.length} 个文本`, 'warning');
               return;
             }
             
@@ -268,15 +305,20 @@ figma.ui.onmessage = async (msg) => {
             let errorMessage = `翻译失败: ${error.message}`;
             const textPreview = node.characters.substring(0, 20) + (node.characters.length > 20 ? '...' : '');
             
-            // 为常见错误提供更友好的提示
-            if (error.message.includes('字体加载')) {
-              errorMessage = `文本 "${textPreview}" 字体加载失败，请检查字体是否可用`;
-            } else if (error.message.includes('网络')) {
+            // 为常见错误提供更友好的提示（中文）
+            const msg = (error && error.message) ? error.message : '';
+            const fontMatch = msg.match(/font\s+\"([^\"]+)\"/i);
+            const fontNameText = fontMatch ? `（字体：${fontMatch[1]}）` : '';
+            if (msg.includes('字体加载') || msg.includes('loadFontAsync')) {
+              errorMessage = `文本 "${textPreview}" 字体加载失败${fontNameText}，请确认该字体在本机/Figma中可用，或将该文本图层切换为已安装字体后重试`;
+            } else if (msg.includes('unloaded font') || msg.includes('set_characters')) {
+              errorMessage = `文本 "${textPreview}" 字体未加载${fontNameText}，请先在Figma中加载该字体，或将该文本图层更换为已安装字体后再试`;
+            } else if (msg.includes('网络')) {
               errorMessage = `文本 "${textPreview}" 网络请求失败，请检查网络连接和API配置`;
-            } else if (error.message.includes('API')) {
-              errorMessage = `文本 "${textPreview}" API调用失败: ${error.message}`;
+            } else if (msg.includes('API')) {
+              errorMessage = `文本 "${textPreview}" API调用失败: ${msg}`;
             } else {
-              errorMessage = `文本 "${textPreview}" 翻译失败: ${error.message}`;
+              errorMessage = `文本 "${textPreview}" 翻译失败: ${msg}`;
             }
             
             figma.ui.postMessage({
@@ -295,6 +337,12 @@ figma.ui.onmessage = async (msg) => {
             total: selectedNodes.length,
             hasError: hasError
           });
+          sendLog(
+            hasError 
+              ? `翻译完成，成功: ${completedCount}/${selectedNodes.length} (部分失败)` 
+              : `翻译完成，全部成功: ${completedCount}/${selectedNodes.length}`,
+            hasError ? 'warning' : 'success'
+          );
         }
         break;
         
@@ -310,6 +358,7 @@ figma.ui.onmessage = async (msg) => {
         break;
     }
   } catch (error) {
+    sendLog(`操作失败: ${error.message}`, 'error');
     figma.ui.postMessage({
       type: 'error',
       message: `操作失败: ${error.message}`

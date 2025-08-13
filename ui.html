@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>lumitrans</title>
-    
+
     <!-- Google Material Symbols 字体引用 -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <!-- 多语言数据 -->
     <script>
         // 语言文件
@@ -22,24 +24,24 @@
                 promptTemplate: '提示词模板',
                 startTranslation: '开始翻译',
                 stopTranslation: '停止翻译',
-                
+
                 // 设置对话框
                 apiUrl: 'API地址',
                 apiKey: 'API密钥',
                 prompt: '提示词',
                 save: '保存',
                 close: '关闭',
-                
+
                 // 语言选择
                 language: '界面语言',
-                
+
                 // 占位符文本
                 placeholderApiUrl: 'https://api.openai.com/v1/chat/completions',
                 placeholderApiKey: 'sk-...',
                 placeholderModel: 'gpt-4.1-nano',
                 placeholderPrompt: '你是一个专业的翻译助手...',
                 placeholderPromptName: '为此提示词命名...',
-                
+
                 // 状态消息
                 statusConfigNeeded: '请先配置API设置',
                 statusConfigured: '配置已完成',
@@ -47,23 +49,29 @@
                 statusCompleted: '翻译完成！',
                 statusStopping: '正在停止翻译...',
                 statusError: '翻译出错',
-                
+
+                // API状态短文案（新增：多语言简短显示）
+                statusApiTestingShort: '测试中...',
+                statusApiOkShort: '已连接',
+                statusApiNotConfiguredShort: '未配置',
+                statusApiErrorShort: '连接失败',
+
                 // 进度消息
                 progressProcessing: '正在处理',
                 progressTranslating: '翻译进度',
-                
+
                 // 提示词模板
                 templateStandard: '标准翻译',
                 templateLocalization: '本地化',
                 templateUI: '界面文案',
                 templateTechnical: '技术文档',
-                
+
                 // 提示词模板内容
                 promptContentStandard: '你是一个专业的翻译助手。请将用户提供的文本翻译成{targetLanguage}。只返回翻译结果，不要添加任何解释或其他内容。',
                 promptContentLocalization: '你是一个专业的本地化专家。请将以下文本翻译成{targetLanguage}，保持原文的语气和风格，使其符合目标语言的表达习惯。只返回翻译结果。',
                 promptContentUI: '你是一个UI/UX文案专家。请将以下界面文本翻译成{targetLanguage}，要求简洁明了，符合用户界面的表达规范。只返回翻译结果。',
                 promptContentTechnical: '你是一个技术文档翻译专家。请将以下技术文本翻译成{targetLanguage}，保持专业术语的准确性。只返回翻译结果。',
-                
+
                 // 成功/错误消息
                 promptSaved: '提示词 "{name}" 已保存',
                 promptDeleted: '提示词 "{name}" 已删除',
@@ -81,12 +89,12 @@
                 translationStopped: '翻译已停止 - 已完成 {completed}/{total} 个文本',
                 translationCompletedPartial: '翻译完成！已完成 {completed}/{total} 个文本（部分失败）',
                 translationCompletedAll: '翻译完成！所有文本翻译成功',
-                
+
                 // 进度消息详细版本
                 progressProcessingDetail: '正在处理 ({completed}/{total}): {currentText}',
                 progressTranslatingDetail: '翻译进度: {completed}/{total} ({progress}%) - 已完成: {currentText}',
                 progressTranslatingSimple: '翻译进度: {completed}/{total} ({progress}%)',
-                
+
                 // 语言名称
                 languages: {
                     'zh-CN': '简体中文',
@@ -117,7 +125,7 @@
                     'uk': '乌克兰语'
                 }
             },
-            
+
             'en': {
                 // Main interface
                 title: 'lumitrans Translator',
@@ -128,24 +136,24 @@
                 promptTemplate: 'Prompt Template',
                 startTranslation: 'Start Translation',
                 stopTranslation: 'Stop Translation',
-                
+
                 // Settings dialog
                 apiUrl: 'API URL',
                 apiKey: 'API Key',
                 prompt: 'Prompt',
                 save: 'Save',
                 close: 'Close',
-                
+
                 // Language selection
                 language: 'Interface Language',
-                
+
                 // Placeholders
                 placeholderApiUrl: 'https://api.openai.com/v1/chat/completions',
                 placeholderApiKey: 'sk-...',
                 placeholderModel: 'gpt-4.1-nano',
                 placeholderPrompt: 'You are a professional translator...',
                 placeholderPromptName: 'Name this prompt...',
-                
+
                 // Status messages
                 statusConfigNeeded: 'Please configure API settings first',
                 statusConfigured: 'Configuration complete',
@@ -154,22 +162,28 @@
                 statusStopping: 'Stopping translation...',
                 statusError: 'Translation error',
                 
+                // API short statuses (added)
+                statusApiTestingShort: 'Testing...',
+                statusApiOkShort: 'Connected',
+                statusApiNotConfiguredShort: 'Not configured',
+                statusApiErrorShort: 'Failed',
+
                 // Progress messages
                 progressProcessing: 'Processing',
                 progressTranslating: 'Translation progress',
-                
+
                 // Prompt templates
                 templateStandard: 'Standard',
                 templateLocalization: 'Localization',
                 templateUI: 'UI Text',
                 templateTechnical: 'Technical',
-                
+
                 // Prompt templates content
                 promptContentStandard: 'You are a professional translator. Please translate the text provided by the user into {targetLanguage}. Return only the translation, without any explanation or other content.',
                 promptContentLocalization: 'You are a professional localizer. Please translate the following text into {targetLanguage}, maintaining the original tone and style, so that it fits the expression habits of the target language. Return only the translation.',
                 promptContentUI: 'You are a UI/UX copywriter. Please translate the following interface text into {targetLanguage}, keeping it simple and clear, to fit the expression norms of the user interface. Return only the translation.',
                 promptContentTechnical: 'You are a technical document translator. Please translate the following technical text into {targetLanguage}, maintaining the accuracy of professional terms. Return only the translation.',
-                
+
                 // Success/Error messages
                 promptSaved: 'Prompt saved',
                 promptDeleted: 'Prompt deleted',
@@ -187,16 +201,16 @@
                 translationStopped: 'Translation stopped - Completed {completed}/{total} texts',
                 translationCompletedPartial: 'Translation completed! Finished {completed}/{total} texts (some failed)',
                 translationCompletedAll: 'Translation completed! All texts translated successfully',
-                
+
                 // Progress messages
                 progressProcessingDetail: 'Processing ({completed}/{total}): {currentText}',
                 progressTranslatingDetail: 'Translation progress: {completed}/{total} ({progress}%) - Completed: {currentText}',
                 progressTranslatingSimple: 'Translation progress: {completed}/{total} ({progress}%)',
-                
+
                 // Language names
                 languages: {
                     'zh-CN': 'Simplified Chinese',
-                    'zh-TW': 'Traditional Chinese', 
+                    'zh-TW': 'Traditional Chinese',
                     'en': 'English',
                     'ja': 'Japanese',
                     'ko': 'Korean',
@@ -223,7 +237,7 @@
                     'uk': 'Ukrainian'
                 }
             },
-            
+
             'ja': {
                 // メインインターフェース
                 title: 'lumitrans翻訳アシスタント',
@@ -234,24 +248,24 @@
                 promptTemplate: 'プロンプトテンプレート',
                 startTranslation: '翻訳開始',
                 stopTranslation: '翻訳停止',
-                
+
                 // 設定ダイアログ
                 apiUrl: 'API URL',
                 apiKey: 'API キー',
                 prompt: 'プロンプト',
                 save: '保存',
                 close: '閉じる',
-                
+
                 // 言語選択
                 language: 'インターフェース言語',
-                
+
                 // プレースホルダー
                 placeholderApiUrl: 'https://api.openai.com/v1/chat/completions',
                 placeholderApiKey: 'sk-...',
                 placeholderModel: 'gpt-4.1-nano',
                 placeholderPrompt: 'あなたは専門的な翻訳者です...',
                 placeholderPromptName: 'このプロンプトに名前を付ける...',
-                
+
                 // ステータスメッセージ
                 statusConfigNeeded: 'まずAPI設定を構成してください',
                 statusConfigured: '設定完了',
@@ -260,22 +274,28 @@
                 statusStopping: '翻訳を停止中...',
                 statusError: '翻訳エラー',
                 
+                // API短い表示（追加）
+                statusApiTestingShort: 'テスト中...',
+                statusApiOkShort: '接続済み',
+                statusApiNotConfiguredShort: '未設定',
+                statusApiErrorShort: '失敗',
+
                 // プログレスメッセージ
                 progressProcessing: '処理中',
                 progressTranslating: '翻訳進行状況',
-                
+
                 // プロンプトテンプレート
                 templateStandard: '標準翻訳',
                 templateLocalization: 'ローカライゼーション',
                 templateUI: 'UIテキスト',
                 templateTechnical: '技術文書',
-                
+
                 // Prompt templates content
                 promptContentStandard: 'あなたは専門的な翻訳者です。ユーザーから提供されたテキストを{targetLanguage}に翻訳してください。翻訳結果のみを返し、説明やその他の内容は追加しないでください。',
                 promptContentLocalization: 'あなたは専門的なローカライザーです。以下のテキストを{targetLanguage}に翻訳し、原文のトーンとスタイルを維持して、その言語の表現習慣に合わせてください。翻訳結果のみを返してください。',
                 promptContentUI: 'あなたはUI/UXコピーライターです。以下のインターフェーステキストを{targetLanguage}に翻訳し、シンプルで明確な表現にして、ユーザーのインターフェースの表現規範に合わせてください。翻訳結果のみを返してください。',
                 promptContentTechnical: 'あなたは技術文書翻訳専門家です。以下の技術テキストを{targetLanguage}に翻訳し、専門用語の正確性を維持してください。翻訳結果のみを返してください。',
-                
+
                 // 成功/エラーメッセージ
                 promptSaved: 'プロンプトが保存されました',
                 promptDeleted: 'プロンプトが削除されました',
@@ -293,12 +313,12 @@
                 translationStopped: '翻訳が停止されました - {completed}/{total}個のテキストが完了',
                 translationCompletedPartial: '翻訳完了！{completed}/{total}個のテキストが完了（一部失敗）',
                 translationCompletedAll: '翻訳完了！すべてのテキストが正常に翻訳されました',
-                
+
                 // プログレスメッセージ詳細版
                 progressProcessingDetail: '処理中 ({completed}/{total}): {currentText}',
                 progressTranslatingDetail: '翻訳進行状況: {completed}/{total} ({progress}%) - 完了: {currentText}',
                 progressTranslatingSimple: '翻訳進行状況: {completed}/{total} ({progress}%)',
-                
+
                 // 言語名
                 languages: {
                     'zh-CN': '簡体字中国語',
@@ -330,15 +350,15 @@
                 }
             }
         };
-        
+
         // 当前语言设置
         let currentUILanguage = 'zh-CN';
-        
+
         // i18n 功能
         function t(key, replacements = {}) {
             const keys = key.split('.');
             let value = i18nData[currentUILanguage];
-            
+
             for (const k of keys) {
                 if (value && typeof value === 'object') {
                     value = value[k];
@@ -346,7 +366,7 @@
                     break;
                 }
             }
-            
+
             if (typeof value !== 'string') {
                 // 回退到中文
                 value = i18nData['zh-CN'];
@@ -358,40 +378,40 @@
                     }
                 }
             }
-            
+
             if (typeof value === 'string') {
                 // 替换占位符
                 return value.replace(/\{(\w+)\}/g, (match, key) => {
                     return replacements[key] !== undefined ? replacements[key] : match;
                 });
             }
-            
+
             return key; // 如果找不到翻译，返回键名
         }
-        
+
         // 更新界面语言
         function updateUILanguage() {
             // 更新页面标题
             document.title = t('title');
-            
+
             // 更新所有带有 data-i18n 属性的元素
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 element.textContent = t(key);
             });
-            
+
             // 更新所有带有 data-i18n-placeholder 属性的元素
             document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
                 const key = element.getAttribute('data-i18n-placeholder');
                 element.placeholder = t(key);
             });
-            
+
             // 更新所有带有 data-i18n-title 属性的元素
             document.querySelectorAll('[data-i18n-title]').forEach(element => {
                 const key = element.getAttribute('data-i18n-title');
                 element.title = t(key);
             });
-            
+
             // 更新翻译目标语言下拉框的选项文本
             const targetLanguageSelect = document.getElementById('targetLanguage');
             if (targetLanguageSelect) {
@@ -404,7 +424,7 @@
                     }
                 });
             }
-            
+
             // 更新快速提示词选择框的选项文本
             const quickPromptSelect = document.getElementById('quickPromptSelect');
             if (quickPromptSelect) {
@@ -414,7 +434,7 @@
                         // 更新预设提示词选项的文本
                         const templateNames = {
                             'standard': 'templateStandard',
-                            'localization': 'templateLocalization', 
+                            'localization': 'templateLocalization',
                             'ui': 'templateUI',
                             'technical': 'templateTechnical'
                         };
@@ -424,7 +444,7 @@
                     }
                 });
             }
-            
+
             // 更新设置弹窗中的提示词模板内容
             const promptTags = document.querySelectorAll('.prompt-templates .prompt-tag:not(.custom-prompt-tag)');
             promptTags.forEach(tag => {
@@ -436,14 +456,14 @@
                     'ui': 'promptContentUI',
                     'technical': 'promptContentTechnical'
                 };
-                
+
                 if (promptContentKeys[templateType]) {
                     const newPromptContent = t(promptContentKeys[templateType]);
                     tag.setAttribute('data-prompt', newPromptContent);
                 }
             });
         }
-        
+
         // 初始化语言设置
         async function initLanguage() {
             // 从存储中加载语言设置
@@ -455,15 +475,15 @@
             } catch (e) {
                 console.log('Could not load language setting:', e);
             }
-            
+
             // 设置UI语言选择框的值
             const uiLanguageSelect = document.getElementById('uiLanguage');
             if (uiLanguageSelect) {
                 uiLanguageSelect.value = currentUILanguage;
             }
-            
+
             updateUILanguage();
-            
+
             // 确保下拉框选项文本也得到更新
             setTimeout(() => {
                 if (typeof renderQuickPromptSelect === 'function') {
@@ -473,7 +493,7 @@
                 adjustUIHeight();
             }, 100);
         }
-        
+
         // 切换语言
         function changeLanguage(language) {
             if (i18nData[language]) {
@@ -484,35 +504,35 @@
                     console.log('Could not save language setting:', e);
                 }
                 updateUILanguage();
-                
+
                 // 更新语言下拉框的选中状态
                 const langSelect = document.getElementById('uiLanguage');
                 if (langSelect) {
                     langSelect.value = language;
                 }
-                
+
                 // 语言切换后调整高度
                 setTimeout(() => {
                     adjustUIHeight();
                 }, 100);
             }
         }
-        
+
         // 计算并调整UI高度
         function adjustUIHeight() {
             try {
                 // 计算实际内容高度
                 const container = document.querySelector('.container');
                 if (!container) return;
-                
+
                 // 获取容器的实际高度
                 const containerHeight = container.scrollHeight;
                 // 加上body的padding（上下各16px）
                 const totalHeight = containerHeight + 32;
-                
+
                 // 限制高度范围：最小400px，最大800px
                 const clampedHeight = Math.min(Math.max(totalHeight, 400), 800);
-                
+
                 // 发送调整高度的消息给主线程
                 parent.postMessage({
                     pluginMessage: {
@@ -526,59 +546,58 @@
             }
         }
     </script>
-    
+
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scrollbar-width: none;
         }
 
         body {
+            display: flex;
+            flex-direction: column;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: 12px;
             line-height: 1.4;
-            color: #333;
-            padding: 16px;
-            margin: 0;
-            min-height: 400px;
-            max-height: 80vh;
-            height: auto;
-            overflow-y: auto;
             box-sizing: border-box;
             background-color: #f3f3f3;
+
         }
 
         .container {
-            border-radius: 8px;
-            height: auto;
-            min-height: 100%;
+            min-height: 550px;
             display: flex;
+            border-radius: 8px;
+            gap: 6px;
+            padding: 8px;
             flex-direction: column;
+            scrollbar-width: none;
         }
 
         .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             background: #ffffff;
             border-radius: 8px;
             padding: 16px;
-            margin-bottom: 12px;
         }
 
         .info-row {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-around;
-            margin-bottom: 16px;
-            padding: 12px 12px;
-            border-radius: 2px;
-            background-color: #e9e9e9;
+            padding: 40px 12px;
+            border-radius: 4px;
+            background-color: #fff1f1;
         }
 
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
         }
 
         .title {
@@ -614,28 +633,44 @@
             border-color: #007AFF;
         }
 
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            padding-top: 4px !important;
+            width: 80px !important;
+        }
+
+        .form-group-column {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+            width: 100% !important;
+        }
+
         h2 {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 16px;
             color: #1a1a1a;
             border-bottom: 2px solid #007AFF;
             padding-bottom: 8px;
         }
 
-        .form-group {
-            margin-bottom: 8px;
-        }
-
         label {
             display: block;
             font-weight: 500;
-            margin-bottom: 6px;
             color: #555;
             font-size: 13px;
         }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             width: 100%;
             padding: 8px 12px;
             border: 1px solid #ddd;
@@ -700,10 +735,12 @@
             line-height: 1.4;
         }
 
-        input:focus, select:focus, textarea:focus {
+        input:focus,
+        select:focus,
+        textarea:focus {
             outline: none;
             border-color: #007AFF;
-            box-shadow: 0 0 0 2px rgba(0,122,255,0.1);
+            box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.1);
         }
 
         /* 表单容器样式优化 */
@@ -722,15 +759,15 @@
         }
 
         .select-container select {
-            padding-left: 40px;
+            padding: 8px 4px;
         }
 
         .select-container:hover .select-icon {
             color: #007AFF;
         }
 
-        .select-container select:focus + .select-icon,
-        .select-container select:focus ~ .select-icon {
+        .select-container select:focus+.select-icon,
+        .select-container select:focus~.select-icon {
             color: #007AFF;
         }
 
@@ -752,6 +789,9 @@
             background-size: 200% 200%;
             color: white;
             font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: medium;
             animation: gradientShift 3s ease infinite;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
@@ -761,7 +801,7 @@
         }
 
         .btn-primary:hover:not(:disabled) {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background: linear-gradient(135deg, #002fff 0%, #8000ff 25%, #e600ff 50%, #ff0022 75%, #ffc400 100%);
             background-size: 200% 200%;
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
@@ -772,9 +812,11 @@
             0% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
+
             100% {
                 background-position: 0% 50%;
             }
@@ -784,6 +826,7 @@
             background: #dc3545;
             color: white;
             font-size: 16px;
+            border-radius: 50px;
             padding: 14px 24px;
         }
 
@@ -854,14 +897,12 @@
         }
 
         .section {
-            margin-bottom: 24px;
             padding-bottom: 20px;
             border-bottom: 1px solid #e9ecef;
         }
 
         .section:last-child {
             border-bottom: none;
-            margin-bottom: 0;
         }
 
         .help-text {
@@ -886,8 +927,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .hidden {
@@ -949,7 +995,8 @@
             min-height: 300px;
             max-height: 85vh;
             height: auto;
-            overflow: hidden;  /* 改为hidden，让内部控制滚动 */
+            overflow: hidden;
+            /* 改为hidden，让内部控制滚动 */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             transform: scale(0.7);
             transition: transform 0.3s ease;
@@ -965,9 +1012,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 24px 16px;
+            padding: 8px 12px;
             border-bottom: 1px solid #e9ecef;
-            flex-shrink: 0;  /* 防止收缩 */
+            flex-shrink: 0;
+            /* 防止收缩 */
         }
 
         .modal-title {
@@ -984,23 +1032,22 @@
             border: none;
             color: #999;
             cursor: pointer;
-            padding: 4px;
-            width: 32px;
-            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
             transition: all 0.2s;
+            
         }
-
+        .close-btn .material-symbols-outlined{
+            font-size: 24px;
+        }
         .close-btn:hover {
-            background: #f8f9fa;
             color: #333;
         }
 
         .modal-body {
-            padding: 24px 24px 12px 24px;  /* 减少底部内边距 */
+            padding: 12px;
+            /* 减少底部内边距 */
             flex: 1;
             overflow-y: auto;
             min-height: 0;
@@ -1008,12 +1055,9 @@
 
         /* 新增：模态框底部固定区域 */
         .modal-footer {
-            padding: 16px 24px;
-            border-top: 1px solid #e9ecef;
-            background: #f8f9fa;
-            flex-shrink: 0;  /* 防止收缩 */
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
+            padding: 4px 4px;
+            background: transparent;
+            flex-shrink: 0;
         }
 
         .modal-footer .btn {
@@ -1022,7 +1066,7 @@
             font-size: 16px;
             font-weight: 600;
             padding: 12px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4facfe 100%);
+            background: linear-gradient(135deg, #002fff 0%, #8000ff 25%, #e600ff 50%, #ff0022 75%, #ffc400 100%);
             color: white;
             border: none;
             border-radius: 8px;
@@ -1073,14 +1117,7 @@
         }
 
         .model-info {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 3px 10px;
-            background: #f3e5f5;
-            border-radius: 16px;
-            font-size: 10px;
-            color: #4a148c;
+            display: none !important;
         }
 
         .language-section {
@@ -1095,13 +1132,13 @@
             font-size: 12px;
             font-weight: 600;
             color: #333;
-            margin-bottom: 8px;
             display: flex;
+            margin-bottom: 8px;
             align-items: center;
             gap: 6px;
         }
 
-        .information{
+        .information {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1118,9 +1155,9 @@
         }
 
         .selection-count {
-            font-size: 24px;
-            font-weight: 700;
-            color: #007AFF;
+            font-size: 80px;
+            font-weight: 100;
+            color: #5e07ff;
         }
 
         .selection-text {
@@ -1132,16 +1169,11 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            padding: 4px 4px;
-            border-radius: 16px;
-            background-color: #ffffff;
-            margin-bottom: 12px;
         }
 
         .translate-section {
             display: flex;
             align-items: center;
-            margin-bottom: 16px;
         }
 
         .progress-info {
@@ -1156,6 +1188,11 @@
             color: white;
             font-size: 16px;
             padding: 14px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
         }
 
         .btn-stop:hover:not(:disabled) {
@@ -1165,7 +1202,7 @@
         .stop-spinner {
             width: 14px;
             height: 14px;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-top: 2px solid white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -1175,7 +1212,8 @@
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-top: 8px;
+            background-color: white;
+            border: none;
         }
 
         .prompt-tag {
@@ -1195,11 +1233,7 @@
         }
 
         /* 保存自定义模板样式 */
-        .save-prompt-section {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #e9ecef;
-        }
+        .save-prompt-section {}
 
         .save-prompt-input {
             display: flex;
@@ -1247,15 +1281,15 @@
         .custom-prompt-tag {
             background: #e0f2f7;
             color: #0056b3;
-            padding: 4px 8px;
+            padding: 2px 4px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.2s;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 2px;
             position: relative;
         }
 
@@ -1270,15 +1304,12 @@
             border: none;
             color: #999;
             cursor: pointer;
-            padding: 2px;
-            border-radius: 50%;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 16px;
-            height: 16px;
-            margin-left: 4px;
+            width: 12px;
+            height: 12px;
         }
 
         .delete-prompt:hover {
@@ -1293,12 +1324,13 @@
         /* 模型输入容器样式 */
         .model-input-container {
             display: flex;
-            align-items: center;
             gap: 8px;
+            width: 100% !important;
         }
 
         .model-input-container input {
             flex-grow: 1;
+
         }
 
         .btn-quick-save {
@@ -1327,7 +1359,6 @@
         }
 
         .model-templates {
-            margin-top: 8px;
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
@@ -1403,7 +1434,6 @@
         .quick-switch-section {
             display: flex;
             gap: 16px;
-            margin-bottom: 16px;
             padding: 0;
             background: none;
             border: none;
@@ -1485,7 +1515,6 @@
 
         .select-container select {
             width: 100%;
-            padding-left: 12px;
         }
 
         .select-icon {
@@ -1500,75 +1529,264 @@
             color: #333;
         }
 
-        .select-container select:focus + .select-icon,
-        .select-container select:focus ~ .select-icon {
+        .select-container select:focus+.select-icon,
+        .select-container select:focus~.select-icon {
             color: #339af0;
         }
 
         /* 界面语言选择器特殊样式 */
         #uiLanguage {
+            width: 32px;
+            padding-top: 12px;
+            line-height: 1;
             padding: 0 0;
-            font-size: 14px;
-            color: #757575;
+            font-size: 16px;
+            color: rgb(99, 99, 99);
+            opacity: 0.6;
+            /* 降低不透明度 */
             text-align: center;
-            background-image: none;  /* 移除下拉箭头 */
-            border: none;  /* 移除边框 */
-            background: transparent;  /* 移除背景色 */
+            background-image: none;
+            /* 移除下拉箭头 */
+            border: none;
+            /* 移除边框 */
+            background: transparent;
+            /* 移除背景色 */
         }
 
-        #uiLanguage:hover, #uiLanguage:focus {
-            background: transparent;  /* 保持透明背景 */
-            border: none;  /* 保持无边框 */
-            box-shadow: none;  /* 移除焦点阴影 */
+        #uiLanguage:hover,
+        #uiLanguage:focus {
+            background: transparent;
+            /* 保持透明背景 */
+            border: none;
+            /* 保持无边框 */
+            opacity: 1;
+            /* 悬停时显示完全不透明 */
+            box-shadow: none;
+            /* 移除焦点阴影 */
         }
 
         #uiLanguage option {
             font-size: 16px;
             text-align: center;
             background: #ffffff;
+            color: #757575;
+        }
+
+        .info-container {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            border-top: 1px solid rgb(207, 207, 207);
+        }
+
+        /* 日志图标样式 */
+        .log-button {
+            font-size: 16px;
+            width: 32px;
+            height: 32px;
+            background-color: transparent;
+            opacity: 0.6;
+            /* 降低不透明度 */
+            color: rgb(99, 99, 99);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
+            /* 移除阴影 */
+            z-index: 2;
+            transition: all 0.2s ease;
+        }
+
+        .log-button:hover {
+            opacity: 1;
+            /* 悬停时显示完全不透明 */
+        }
+
+        .log-button .material-symbols-outlined {
+            font-size: 16px;
+        }
+
+        /* 移除未读消息气泡样式 */
+        .log-button .badge {
+            display: none;
+        }
+
+        /* 日志弹窗样式 */
+        .log-modal {
+            position: absolute;
+            bottom: 20px;
+            right: 8px;
+            width: 280px;
+            max-height: 360px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .log-modal.show {
+            display: flex;
+        }
+
+        .log-header {
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .log-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .log-content {
+            padding: 12px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .log-entry {
             padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .log-entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .log-entry.info {
+            background: #e7f5ff;
+            color: #004085;
+        }
+
+        .log-entry.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .log-entry.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .log-entry.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .log-entry .timestamp {
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .log-actions {
+            padding: 8px 16px;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .log-actions button {
+            border: none;
+            background: none;
+            color: #007AFF;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .log-actions button:hover {
+            background: #f1f3f5;
+        }
+
+        /* 现有样式下方补充API连通性状态样式 */
+        .config-status.testing {
+            background: #cce7ff;
+            color: #004085;
+        }
+        .config-status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status-indicator.testing {
+            background: #17a2b8; /* 蓝色，表示测试中 */
+        }
+        .status-indicator.error {
+            background: #dc3545; /* 红色，表示失败 */
+        }
+
+        .github-button {
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            border: none;
+            color: rgb(99, 99, 99);
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 2;
+        }
+        .github-button:hover {
+            opacity: 1;
+        }
+        .github-button svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- 头部区域 -->
         <div class="header">
             <div class="title">
-                <img src="https://i.ibb.co/svMdf5c3/Lumitranslogo-4x.png" alt="lumitrans Logo" style="width: 120px; height: 40px; object-fit: contain;">
+                <img src="https://i.ibb.co/svMdf5c3/Lumitranslogo-4x.png" alt="lumitrans Logo"
+                    style="width: 120px; height: 40px; object-fit: contain;">
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
                 <!-- 语言切换 -->
-                <select id="uiLanguage" onchange="changeLanguage(this.value)">
-                    <option value="zh-CN">🇨🇳</option>
-                    <option value="en">🇺🇸</option>
-                    <option value="ja">🇯🇵</option>
-                </select>
+                <div class="status-row">
+                    <!-- 配置状态显示 -->
+                    <div id="configStatus" class="config-status not-configured">
+                        <div class="status-indicator" id="statusIndicator"></div>
+                        <span id="statusText" data-i18n="statusConfigNeeded">请先配置API设置</span>
+                    </div>
+                    <div id="modelInfo" class="model-info hidden">
+                        <span class="material-symbols-outlined icon-small">smart_toy</span>
+                        <span id="currentModel">gpt-4.1-nano</span>
+                    </div>
+                </div>
                 <button class="settings-btn" id="settingsToggle">
                     <span class="material-symbols-outlined icon-small">settings</span>
                 </button>
-            </div>
-        </div>
-        <div class="status-row">
-            <!-- 配置状态显示 -->
-            <div id="configStatus" class="config-status not-configured">
-                <div class="status-indicator" id="statusIndicator"></div>
-                <span id="statusText" data-i18n="statusConfigNeeded">请先配置API设置</span>
-            </div>
-            <div id="modelInfo" class="model-info hidden">
-                <span class="material-symbols-outlined icon-small">smart_toy</span>
-                <span id="currentModel">gpt-4.1-nano</span>
             </div>
         </div>
         <!-- 主要内容区 -->
         <div class="main-content">
             <!-- 信息行：选中文本数量 + 状态信息 -->
             <div class="info-row">
-                <div class="selection-info">
-                    <div class="selection-count" id="selectionCount">0</div>
-                    <div class="selection-text" data-i18n="selectedText">个文本图层已选中</div>
-                </div>
-                
+                <div class="selection-count" id="selectionCount">0</div>
+                <div class="selection-text" data-i18n="selectedText">个文本图层已选中</div>
             </div>
 
             <!-- 目标语言选择 -->
@@ -1576,37 +1794,35 @@
                 <div class="language-title">
                     <span data-i18n="targetLanguage">翻译目标语言</span>
                 </div>
-                <div class="form-group">
-                    <div class="select-container">
-                        <select id="targetLanguage">
-                            <option value="zh-CN">简体中文 🇨🇳</option>
-                            <option value="zh-TW">繁体中文 🇹🇼</option>
-                            <option value="en">英语 🇺🇸</option>
-                            <option value="ja">日语 🇯🇵</option>
-                            <option value="ko">韩语 🇰🇷</option>
-                            <option value="fr">法语 🇫🇷</option>
-                            <option value="de">德语 🇩🇪</option>
-                            <option value="es">西班牙语 🇪🇸</option>
-                            <option value="ru">俄语 🇷🇺</option>
-                            <option value="ar">阿拉伯语 🇸🇦</option>
-                            <option value="pt">葡萄牙语 🇵🇹</option>
-                            <option value="it">意大利语 🇮🇹</option>
-                            <option value="nl">荷兰语 🇳🇱</option>
-                            <option value="sv">瑞典语 🇸🇪</option>
-                            <option value="da">丹麦语 🇩🇰</option>
-                            <option value="no">挪威语 🇳🇴</option>
-                            <option value="fi">芬兰语 🇫🇮</option>
-                            <option value="pl">波兰语 🇵🇱</option>
-                            <option value="cs">捷克语 🇨🇿</option>
-                            <option value="hu">匈牙利语 🇭🇺</option>
-                            <option value="tr">土耳其语 🇹🇷</option>
-                            <option value="th">泰语 🇹🇭</option>
-                            <option value="vi">越南语 🇻🇳</option>
-                            <option value="hi">印地语 🇮🇳</option>
-                            <option value="he">希伯来语 🇮🇱</option>
-                            <option value="uk">乌克兰语 🇺🇦</option>
-                        </select>
-                    </div>
+                <div class="select-container">
+                    <select id="targetLanguage">
+                        <option value="zh-CN">简体中文 🇨🇳</option>
+                        <option value="zh-TW">繁体中文 🇹🇼</option>
+                        <option value="en">英语 🇺🇸</option>
+                        <option value="ja">日语 🇯🇵</option>
+                        <option value="ko">韩语 🇰🇷</option>
+                        <option value="fr">法语 🇫🇷</option>
+                        <option value="de">德语 🇩🇪</option>
+                        <option value="es">西班牙语 🇪🇸</option>
+                        <option value="ru">俄语 🇷🇺</option>
+                        <option value="ar">阿拉伯语 🇸🇦</option>
+                        <option value="pt">葡萄牙语 🇵🇹</option>
+                        <option value="it">意大利语 🇮🇹</option>
+                        <option value="nl">荷兰语 🇳🇱</option>
+                        <option value="sv">瑞典语 🇸🇪</option>
+                        <option value="da">丹麦语 🇩🇰</option>
+                        <option value="no">挪威语 🇳🇴</option>
+                        <option value="fi">芬兰语 🇫🇮</option>
+                        <option value="pl">波兰语 🇵🇱</option>
+                        <option value="cs">捷克语 🇨🇿</option>
+                        <option value="hu">匈牙利语 🇭🇺</option>
+                        <option value="tr">土耳其语 🇹🇷</option>
+                        <option value="th">泰语 🇹🇭</option>
+                        <option value="vi">越南语 🇻🇳</option>
+                        <option value="hi">印地语 🇮🇳</option>
+                        <option value="he">希伯来语 🇮🇱</option>
+                        <option value="uk">乌克兰语 🇺🇦</option>
+                    </select>
                 </div>
             </div>
 
@@ -1648,13 +1864,12 @@
             <button class="btn btn-primary" id="translateBtn" disabled>
                 <span data-i18n="startTranslation">开始翻译</span>
             </button>
-            
-            <div id="progress" class="progress hidden">
-                <div id="progressBar" class="progress-bar"></div>
-            </div>
-            <div id="progressInfo" class="progress-info hidden"></div>
         </div>
 
+        <div id="progress" class="progress hidden">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <div id="progressInfo" class="progress-info hidden"></div>
         <!-- 状态显示 -->
         <div id="status"></div>
     </div>
@@ -1674,52 +1889,69 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="apiUrl" data-i18n="apiUrl">API地址</label>
-                    <input type="text" id="apiUrl" data-i18n-placeholder="placeholderApiUrl" placeholder="https://api.openai.com/v1/chat/completions">
+                    <input type="text" id="apiUrl" data-i18n-placeholder="placeholderApiUrl"
+                        placeholder="https://api.openai.com/v1/chat/completions">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="apiKey" data-i18n="apiKey">API密钥</label>
                     <input type="password" id="apiKey" data-i18n-placeholder="placeholderApiKey" placeholder="sk-...">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="modelName" data-i18n="model">模型</label>
-                    <div class="model-input-container">
-                        <input type="text" id="modelName" data-i18n-placeholder="placeholderModel" placeholder="gpt-4.1-nano">
-                        <button class="btn-quick-save" id="quickSaveModelBtn" data-i18n-title="save" title="保存当前模型">
-                            <span class="material-symbols-outlined icon-small">add</span>
-                        </button>
-                    </div>
-                    
-                    <div class="model-templates">
-                        <!-- 自定义模型将动态插入到这里 -->
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customPrompt" data-i18n="prompt">提示词</label>
-                    <textarea id="customPrompt" data-i18n-placeholder="placeholderPrompt" placeholder="你是一个专业的翻译助手..."></textarea>
-                    
-                    <!-- 保存自定义模板区域 -->
-                    <div class="save-prompt-section">
-                        <div class="save-prompt-input">
-                            <input type="text" id="promptName" data-i18n-placeholder="placeholderPromptName" placeholder="为此提示词命名..." maxlength="20">
-                            <button class="btn-save-prompt" id="savePromptBtn">
-                                <span class="material-symbols-outlined icon-small">bookmark_add</span>
+                    <div class="form-group-column">
+                        <div class="model-input-container">
+                            <input type="text" id="modelName" data-i18n-placeholder="placeholderModel"
+                                placeholder="gpt-4.1-nano">
+                            <button class="btn-quick-save" id="quickSaveModelBtn" data-i18n-title="save" title="保存当前模型">
+                                <span class="material-symbols-outlined icon-small">add</span>
                             </button>
                         </div>
+                        <div class="model-templates">
+                            <!-- 自定义模型将动态插入到这里 -->
+                        </div>
                     </div>
-                    
-                    <div class="prompt-templates">
-                        <span class="prompt-tag" data-template-type="standard" data-prompt="你是一个专业的翻译助手。请将用户提供的文本翻译成{targetLanguage}。只返回翻译结果，不要添加任何解释或其他内容。" data-i18n="templateStandard">标准</span>
-                        <span class="prompt-tag" data-template-type="localization" data-prompt="你是一个专业的本地化专家。请将以下文本翻译成{targetLanguage}，保持原文的语气和风格，使其符合目标语言的表达习惯。只返回翻译结果。" data-i18n="templateLocalization">本地化</span>
-                        <span class="prompt-tag" data-template-type="ui" data-prompt="你是一个UI/UX文案专家。请将以下界面文本翻译成{targetLanguage}，要求简洁明了，符合用户界面的表达规范。只返回翻译结果。" data-i18n="templateUI">界面</span>
-                        <span class="prompt-tag" data-template-type="technical" data-prompt="你是一个技术文档翻译专家。请将以下技术文本翻译成{targetLanguage}，保持专业术语的准确性。只返回翻译结果。" data-i18n="templateTechnical">技术</span>
-                        <!-- 自定义模板将动态插入到这里 -->
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="customPrompt" data-i18n="prompt">提示词</label>
+
+                    <div class="form-group-column">
+                        <div class="save-prompt-section">
+                            <div class="save-prompt-input">
+                                <input type="text" id="promptName" data-i18n-placeholder="placeholderPromptName"
+                                    placeholder="为此提示词命名..." maxlength="20">
+                                <button class="btn-quick-save" id="savePromptBtn">
+                                    <span class="material-symbols-outlined icon-small">bookmark_add</span>
+                                </button>
+                            </div>
+                        </div>
+                        <textarea id="customPrompt" data-i18n-placeholder="placeholderPrompt"
+                            placeholder="你是一个专业的翻译助手..."></textarea>
+
+                        <!-- 保存自定义模板区域 -->
+                        <div class="prompt-templates">
+                            <span class="prompt-tag" data-template-type="standard"
+                                data-prompt="你是一个专业的翻译助手。请将用户提供的文本翻译成{targetLanguage}。只返回翻译结果，不要添加任何解释或其他内容。"
+                                data-i18n="templateStandard">标准</span>
+                            <span class="prompt-tag" data-template-type="localization"
+                                data-prompt="你是一个专业的本地化专家。请将以下文本翻译成{targetLanguage}，保持原文的语气和风格，使其符合目标语言的表达习惯。只返回翻译结果。"
+                                data-i18n="templateLocalization">本地化</span>
+                            <span class="prompt-tag" data-template-type="ui"
+                                data-prompt="你是一个UI/UX文案专家。请将以下界面文本翻译成{targetLanguage}，要求简洁明了，符合用户界面的表达规范。只返回翻译结果。"
+                                data-i18n="templateUI">界面</span>
+                            <span class="prompt-tag" data-template-type="technical"
+                                data-prompt="你是一个技术文档翻译专家。请将以下技术文本翻译成{targetLanguage}，保持专业术语的准确性。只返回翻译结果。"
+                                data-i18n="templateTechnical">技术</span>
+                            <!-- 自定义模板将动态插入到这里 -->
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- 模态框底部固定保存按钮 -->
             <div class="modal-footer">
                 <button class="btn" id="saveConfig">
@@ -1727,6 +1959,44 @@
                     <span data-i18n="save">保存</span>
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- 日志图标按钮 -->
+    <div class="info-container">
+        <select id="uiLanguage" onchange="changeLanguage(this.value)">
+            <option value="zh-CN">🇨🇳</option>
+            <option value="en">🇺🇸</option>
+            <option value="ja">🇯🇵</option>
+        </select>
+        <a class="github-button" href="https://github.com/kimiisme/lumitrans" target="_blank" rel="noopener noreferrer" title="GitHub">
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+        </a>
+        <button class="log-button" id="logButton">
+            <span class="material-symbols-outlined">info</span>
+            <span class="badge" id="logBadge">0</span>
+        </button>
+    </div>
+
+    <!-- 日志弹窗 -->
+    <div class="log-modal" id="logModal">
+        <div class="log-header">
+            <div class="log-title">
+                <span class="material-symbols-outlined">history</span>
+                <span>操作日志</span>
+            </div>
+            <button class="close-btn" id="closeLogModal">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="log-content" id="logContent">
+            <!-- 日志条目将动态插入这里 -->
+        </div>
+        <div class="log-actions">
+            <button id="clearLogs">清空日志</button>
+            <button id="exportLogs">导出日志</button>
         </div>
     </div>
 
@@ -1805,12 +2075,140 @@
             'uk': '乌克兰语 🇺🇦'
         };
 
+        // 日志功能
+        const logSystem = {
+            maxLogs: 100,
+            logs: [],
+
+            // 添加日志
+            addLog(message, type = 'info') {
+                const log = {
+                    timestamp: new Date(),
+                    message,
+                    type
+                };
+                this.logs.unshift(log);
+                if (this.logs.length > this.maxLogs) {
+                    this.logs.pop();
+                }
+                this.updateUI();
+                this.saveLogs();
+            },
+
+            // 更新UI
+            updateUI() {
+                const logContent = document.getElementById('logContent');
+
+                // 更新日志内容
+                logContent.innerHTML = this.logs.map(log => `
+                    <div class="log-entry ${log.type}">
+                        <div class="timestamp">${log.timestamp.toLocaleString()}</div>
+                        <div class="message">${log.message}</div>
+                    </div>
+                `).join('');
+            },
+
+            // 清空日志
+            clearLogs() {
+                this.logs = [];
+                this.unreadCount = 0;
+                this.updateUI();
+                this.saveLogs();
+            },
+
+            // 导出日志
+            exportLogs() {
+                const logText = this.logs.map(log =>
+                    `[${log.timestamp.toLocaleString()}] [${log.type}] ${log.message}`
+                ).join('\n');
+
+                const blob = new Blob([logText], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `lumitrans-logs-${new Date().toISOString().slice(0, 10)}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            },
+
+            // 保存日志到localStorage
+            saveLogs() {
+                try {
+                    localStorage.setItem('lumitrans-logs', JSON.stringify(this.logs));
+                } catch (e) {
+                    console.error('保存日志失败:', e);
+                }
+            },
+
+            // 加载日志
+            loadLogs() {
+                try {
+                    const savedLogs = localStorage.getItem('lumitrans-logs');
+                    if (savedLogs) {
+                        this.logs = JSON.parse(savedLogs);
+                        this.logs.forEach(log => {
+                            log.timestamp = new Date(log.timestamp);
+                        });
+                        this.updateUI();
+                    }
+                } catch (e) {
+                    console.error('加载日志失败:', e);
+                }
+            }
+        };
+
+        // 初始化日志功能
+        document.addEventListener('DOMContentLoaded', () => {
+            const logButton = document.getElementById('logButton');
+            const logModal = document.getElementById('logModal');
+            const closeLogModal = document.getElementById('closeLogModal');
+            const clearLogs = document.getElementById('clearLogs');
+            const exportLogs = document.getElementById('exportLogs');
+
+            // 加载保存的日志
+            logSystem.loadLogs();
+
+            // 点击日志按钮
+            logButton.addEventListener('click', () => {
+                logModal.classList.toggle('show');
+            });
+
+            // 关闭日志弹窗
+            closeLogModal.addEventListener('click', () => {
+                logModal.classList.remove('show');
+            });
+
+            // 清空日志
+            clearLogs.addEventListener('click', () => {
+                if (confirm('确定要清空所有日志吗？')) {
+                    logSystem.clearLogs();
+                }
+            });
+
+            // 导出日志
+            exportLogs.addEventListener('click', () => {
+                logSystem.exportLogs();
+            });
+
+            // 点击外部关闭日志弹窗
+            document.addEventListener('click', (e) => {
+                if (!logModal.contains(e.target) && !logButton.contains(e.target)) {
+                    logModal.classList.remove('show');
+                }
+            });
+        });
+
         // 显示状态消息
         function showStatus(message, type = 'info') {
             elements.status.className = `status ${type}`;
             elements.status.textContent = message;
             elements.status.style.display = 'block';
-            
+
+            // 添加到日志
+            logSystem.addLog(message, type);
+
             if (type === 'success') {
                 setTimeout(() => {
                     elements.status.style.display = 'none';
@@ -1838,7 +2236,7 @@
         // 更新选中计数显示
         function updateSelectionDisplay() {
             elements.selectionCount.textContent = selectedCount;
-            
+
             const hasConfig = config.apiUrl && config.apiKey && config.modelName;
             elements.translateBtn.disabled = !hasConfig || selectedCount === 0 || isTranslating;
         }
@@ -1869,8 +2267,8 @@
 
         // 加载配置
         function loadConfig() {
-            parent.postMessage({ 
-                pluginMessage: { type: 'load-config' } 
+            parent.postMessage({
+                pluginMessage: { type: 'load-config' }
             }, '*');
         }
 
@@ -1880,12 +2278,12 @@
             config.apiKey = elements.apiKey.value.trim();
             config.modelName = elements.modelName.value.trim();
             config.customPrompt = elements.customPrompt.value.trim();
-            
-            parent.postMessage({ 
-                pluginMessage: { 
+
+            parent.postMessage({
+                pluginMessage: {
                     type: 'save-config',
                     config: config
-                } 
+                }
             }, '*');
         }
 
@@ -1893,7 +2291,7 @@
         function saveLanguage() {
             const newLanguage = elements.targetLanguage.value;
             config.targetLanguage = newLanguage;
-            
+
             parent.postMessage({
                 pluginMessage: {
                     type: 'save-language',
@@ -1905,24 +2303,24 @@
         // 开始翻译
         function startTranslation() {
             if (selectedCount === 0) return;
-            
+
             if (isTranslating) {
                 // 停止翻译
-                parent.postMessage({ 
-                    pluginMessage: { type: 'stop-translation' } 
+                parent.postMessage({
+                    pluginMessage: { type: 'stop-translation' }
                 }, '*');
                 return;
             }
-            
+
             isTranslating = true;
             elements.translateBtn.className = 'btn btn-stop';
             elements.translateBtn.innerHTML = '<span class="loading"><span class="stop-spinner"></span>停止翻译</span>';
             elements.progress.classList.remove('hidden');
             elements.progressInfo.classList.remove('hidden');
             elements.progressBar.style.width = '0%';
-            
-            parent.postMessage({ 
-                pluginMessage: { type: 'translate' } 
+
+            parent.postMessage({
+                pluginMessage: { type: 'translate' }
             }, '*');
         }
 
@@ -1930,6 +2328,8 @@
         function resetTranslateButton() {
             isTranslating = false;
             elements.translateBtn.disabled = false;
+            // 恢复默认样式
+            elements.translateBtn.className = 'btn btn-primary';
             elements.translateBtn.innerHTML = `
                 <span class="material-symbols-outlined icon-small">rocket_launch</span>
                 <span data-i18n="startTranslation">${t('startTranslation')}</span>
@@ -1990,21 +2390,21 @@
                             <span class="material-symbols-outlined icon-small">close</span>
                         </span>
                     `;
-                    
+
                     // 点击模板使用提示词
                     customTag.addEventListener('click', (e) => {
                         if (!e.target.closest('.delete-prompt')) {
                             elements.customPrompt.value = prompt.content;
                         }
                     });
-                    
+
                     // 点击删除按钮
                     const deleteBtn = customTag.querySelector('.delete-prompt');
                     deleteBtn.addEventListener('click', (e) => {
                         e.stopPropagation();
                         deleteCustomPrompt(prompt.id);
                     });
-                    
+
                     promptTemplates.appendChild(customTag);
                 });
             }
@@ -2032,7 +2432,7 @@
             // 检查是否已存在相同的模型
             const existingModels = config.customModels || [];
             const isDuplicate = existingModels.some(model => model.modelName === modelName);
-            
+
             if (isDuplicate) {
                 showStatus(t('modelSavedDuplicate'), 'warning');
                 return;
@@ -2067,21 +2467,21 @@
                             <span class="material-symbols-outlined icon-small">close</span>
                         </span>
                     `;
-                    
+
                     // 点击模型使用模型名称
                     customTag.addEventListener('click', (e) => {
                         if (!e.target.closest('.delete-model')) {
                             elements.modelName.value = model.modelName;
                         }
                     });
-                    
+
                     // 点击删除按钮
                     const deleteBtn = customTag.querySelector('.delete-model');
                     deleteBtn.addEventListener('click', (e) => {
                         e.stopPropagation();
                         deleteCustomModel(model.id);
                     });
-                    
+
                     modelTemplates.appendChild(customTag);
                 });
             }
@@ -2100,16 +2500,16 @@
         // 渲染快速切换模型下拉框
         function renderQuickModelSelect() {
             const quickModelSelect = elements.quickModelSelect;
-            
+
             // 清空所有选项
             quickModelSelect.innerHTML = '';
-            
+
             // 添加默认模型选项
             const defaultOption = document.createElement('option');
             defaultOption.value = 'gpt-4.1-nano';
             defaultOption.textContent = 'gpt-4.1-nano';
             quickModelSelect.appendChild(defaultOption);
-            
+
             // 添加自定义模型选项
             if (config.customModels && config.customModels.length > 0) {
                 config.customModels.forEach(model => {
@@ -2119,7 +2519,7 @@
                     quickModelSelect.appendChild(option);
                 });
             }
-            
+
             // 设置当前选中的模型
             quickModelSelect.value = config.modelName || 'gpt-4.1-nano';
         }
@@ -2127,10 +2527,10 @@
         // 渲染快速切换提示词下拉框
         function renderQuickPromptSelect() {
             const quickPromptSelect = elements.quickPromptSelect;
-            
+
             // 清空所有选项
             quickPromptSelect.innerHTML = '';
-            
+
             // 预设提示词映射
             const defaultPrompts = {
                 'standard': {
@@ -2150,7 +2550,7 @@
                     content: t('promptContentTechnical')
                 }
             };
-            
+
             // 添加默认提示词选项
             Object.keys(defaultPrompts).forEach(key => {
                 const option = document.createElement('option');
@@ -2159,7 +2559,7 @@
                 option.setAttribute('data-prompt', defaultPrompts[key].content);
                 quickPromptSelect.appendChild(option);
             });
-            
+
             // 添加自定义提示词选项
             if (config.customPrompts && config.customPrompts.length > 0) {
                 config.customPrompts.forEach(prompt => {
@@ -2170,11 +2570,11 @@
                     quickPromptSelect.appendChild(option);
                 });
             }
-            
+
             // 设置当前选中的提示词
             const currentPrompt = config.customPrompt;
             let selectedValue = 'standard'; // 默认选择标准翻译
-            
+
             // 检查是否匹配预设提示词
             for (const [key, prompt] of Object.entries(defaultPrompts)) {
                 if (prompt.content === currentPrompt) {
@@ -2182,7 +2582,7 @@
                     break;
                 }
             }
-            
+
             // 检查是否匹配自定义提示词
             if (config.customPrompts) {
                 const matchedCustom = config.customPrompts.find(p => p.content === currentPrompt);
@@ -2190,7 +2590,7 @@
                     selectedValue = `custom_${matchedCustom.id}`;
                 }
             }
-            
+
             quickPromptSelect.value = selectedValue;
         }
 
@@ -2198,10 +2598,10 @@
         function switchModel(modelName) {
             config.modelName = modelName;
             elements.modelName.value = modelName;
-            
+
             // 更新显示
             elements.currentModel.textContent = modelName;
-            
+
             // 通知主线程更新配置
             parent.postMessage({
                 pluginMessage: {
@@ -2209,7 +2609,7 @@
                     config: config
                 }
             }, '*');
-            
+
             updateUI();
             showStatus(t('modelSwitched', { modelName: modelName }), 'success');
         }
@@ -2239,13 +2639,13 @@
                         content: t('promptContentTechnical')
                     }
                 };
-                
+
                 if (defaultPrompts[promptValue]) {
                     config.customPrompt = defaultPrompts[promptValue].content;
                     elements.customPrompt.value = config.customPrompt;
                 }
             }
-            
+
             // 通知主线程更新配置
             parent.postMessage({
                 pluginMessage: {
@@ -2253,7 +2653,7 @@
                     config: config
                 }
             }, '*');
-            
+
             showStatus(t('promptSwitched'), 'success');
         }
 
@@ -2263,7 +2663,7 @@
             elements.quickModelSelect.addEventListener('change', (e) => {
                 switchModel(e.target.value);
             });
-            
+
             // 提示词下拉框变化事件
             elements.quickPromptSelect.addEventListener('change', (e) => {
                 switchPrompt(e.target.value);
@@ -2304,20 +2704,25 @@
         // 消息处理
         window.onmessage = (event) => {
             const msg = event.data.pluginMessage;
-            
+
             switch (msg.type) {
+                case 'log':
+                    // 处理日志消息
+                    logSystem.addLog(msg.message, msg.logType);
+                    break;
+
                 case 'config-loaded':
                     console.log('收到config-loaded消息:', msg.config);
                     config = { ...config, ...msg.config };
                     console.log('合并后的配置:', config);
-                    
+
                     // 填充表单字段
                     if (elements.apiUrl) elements.apiUrl.value = config.apiUrl || '';
                     if (elements.apiKey) elements.apiKey.value = config.apiKey || '';
                     if (elements.modelName) elements.modelName.value = config.modelName || 'gpt-4.1-nano';
                     if (elements.customPrompt) elements.customPrompt.value = config.customPrompt || '';
                     if (elements.targetLanguage) elements.targetLanguage.value = config.targetLanguage || 'zh-CN';
-                    
+
                     updateUI();
                     // 渲染自定义模型和提示词
                     if (config.customModels) {
@@ -2331,8 +2736,11 @@
                     // 更新快速切换区域
                     renderQuickModelSelect();
                     renderQuickPromptSelect();
+                    // 触发API连通性测试并启动定时器
+                    testApiConnectivity('init');
+                    scheduleApiHealthChecks();
                     break;
-                    
+
                 case 'config-saved':
                     showStatus(t('configSaved'), 'success');
                     updateUI();
@@ -2341,18 +2749,21 @@
                     renderQuickPromptSelect();
                     // 保存成功后自动关闭设置模态框
                     hideSettingsModal();
+                    // 保存设置后立即进行连通性测试并重置定时器
+                    testApiConnectivity('saved');
+                    scheduleApiHealthChecks();
                     break;
 
                 case 'language-saved':
                     showStatus(t('languageSwitched', { language: t('languages.' + msg.language) }), 'success');
                     break;
-                    
+
                 case 'selection-changed':
                     selectedCount = msg.count;
                     elements.selectionCount.textContent = selectedCount;
                     elements.translateBtn.disabled = selectedCount === 0 || !config.apiUrl || !config.apiKey;
                     break;
-                    
+
                 case 'translation-started':
                     isTranslating = true;
                     elements.translateBtn.disabled = false;
@@ -2374,46 +2785,50 @@
                     resetTranslateButton();
                     showStatus(t('translationStopped', { completed: msg.completed, total: msg.total }), 'warning');
                     break;
-                    
+
                 case 'translation-progress':
                     elements.progressBar.style.width = `${msg.progress}%`;
                     let progressText;
-                    
+
                     if (msg.status === 'processing') {
-                        progressText = t('progressProcessingDetail', { 
-                            completed: msg.completed, 
-                            total: msg.total, 
-                            currentText: msg.currentText 
+                        progressText = t('progressProcessingDetail', {
+                            completed: msg.completed,
+                            total: msg.total,
+                            currentText: msg.currentText
                         });
                     } else if (msg.currentText) {
-                        progressText = t('progressTranslatingDetail', { 
-                            completed: msg.completed, 
-                            total: msg.total, 
-                            progress: msg.progress, 
-                            currentText: msg.currentText 
+                        progressText = t('progressTranslatingDetail', {
+                            completed: msg.completed,
+                            total: msg.total,
+                            progress: msg.progress,
+                            currentText: msg.currentText
                         });
                     } else {
-                        progressText = t('progressTranslatingSimple', { 
-                            completed: msg.completed, 
-                            total: msg.total, 
-                            progress: msg.progress 
+                        progressText = t('progressTranslatingSimple', {
+                            completed: msg.completed,
+                            total: msg.total,
+                            progress: msg.progress
                         });
                     }
-                    
+
                     elements.progressInfo.textContent = progressText;
                     break;
-                    
+
                 case 'translation-completed':
                     resetTranslateButton();
-                    const message = msg.hasError 
+                    const message = msg.hasError
                         ? t('translationCompletedPartial', { completed: msg.completed, total: msg.total })
                         : t('translationCompletedAll');
                     showStatus(message, msg.hasError ? 'warning' : 'success');
                     break;
-                    
+
                 case 'error':
                     resetTranslateButton();
                     showStatus(msg.message, 'error');
+                    // 将错误写入日志
+                    if (typeof logSystem !== 'undefined') {
+                        logSystem.addLog(msg.message, 'error');
+                    }
                     break;
 
                 case 'custom-prompt-saved':
@@ -2459,14 +2874,14 @@
         setupPromptTemplates();
         initQuickSwitchEvents();
         initLanguage(); // 初始化语言设置
-        
+
         // 添加调试功能到全局作用域
-        window.debugLumitrans = function() {
+        window.debugLumitrans = function () {
             console.log('=== lumitrans 调试信息 ===');
             console.log('当前配置:', config);
             console.log('自定义模型:', config.customModels);
             console.log('自定义提示词:', config.customPrompts);
-            
+
             // 尝试直接从localStorage读取数据
             try {
                 const storedData = localStorage.getItem('lumi-config');
@@ -2479,14 +2894,14 @@
                 console.error('读取localStorage失败:', e);
             }
         };
-        
+
         loadConfig(); // 加载配置
-        
+
         // 延迟渲染确保配置已加载
         setTimeout(() => {
             console.log('延迟渲染执行中...');
             console.log('当前config:', config);
-            
+
             if (config.customModels && config.customModels.length > 0) {
                 console.log('渲染自定义模型:', config.customModels);
                 renderCustomModels(config.customModels);
@@ -2498,6 +2913,97 @@
             renderQuickModelSelect();
             renderQuickPromptSelect();
         }, 500);
+
+        // API 连通性测试
+        let apiHealthTimerId = null;
+        async function testApiConnectivity(reason = 'manual') {
+            try {
+                // 如果未配置，显示未配置状态
+                const hasConfig = config.apiUrl && config.apiKey && config.modelName;
+                if (!hasConfig) {
+                    setApiStatus('not-configured', t('statusConfigNeeded'));
+                    return;
+                }
+                // 设置为测试中
+                setApiStatus('testing', t('statusApiTestingShort'));
+                // 7秒超时控制
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 7000);
+                const resp = await fetch(config.apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${config.apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: config.modelName,
+                        messages: [
+                            { role: 'system', content: 'healthcheck' },
+                           	{ role: 'user', content: 'ping' }
+                        ],
+                        temperature: 0,
+                        max_tokens: 1
+                    }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                if (resp.ok) {
+                    setApiStatus('configured', t('statusApiOkShort'));
+                    logSystem && logSystem.addLog(`API连通性正常（原因: ${reason}）`, 'success');
+                } else {
+                    setApiStatus('error', `${t('statusApiErrorShort')}: ${resp.status} ${resp.statusText}`);
+                    logSystem && logSystem.addLog(`API连通性失败（原因: ${reason}）：${resp.status} ${resp.statusText}`, 'error');
+                }
+            } catch (e) {
+                const message = e.name === 'AbortError' ? 'API连通超时' : `API连通异常: ${e.message}`;
+                setApiStatus('error', message);
+                logSystem && logSystem.addLog(`${message}`, 'error');
+            }
+        }
+        function setApiStatus(status, detailText) {
+            const container = elements.configStatus;
+            const indicator = elements.statusIndicator;
+            const label = elements.statusText;
+            // 重置类名
+            container.className = 'config-status';
+            indicator.className = 'status-indicator';
+            if (status === 'configured') {
+                container.classList.add('configured');
+                indicator.classList.add('configured');
+            } else if (status === 'testing') {
+                container.classList.add('testing');
+                indicator.classList.add('testing');
+            } else if (status === 'error') {
+                container.classList.add('error');
+                indicator.classList.add('error');
+            } else {
+                container.classList.add('not-configured');
+            }
+            // 使用多语言简短文案
+            const shortTextMap = {
+                'configured': 'statusApiOkShort',
+                'testing': 'statusApiTestingShort',
+                'error': 'statusApiErrorShort',
+                'not-configured': 'statusApiNotConfiguredShort'
+            };
+            const i18nKey = shortTextMap[status] || 'statusApiNotConfiguredShort';
+            label.textContent = t(i18nKey);
+            // 详细信息放在title，鼠标悬停可见
+            if (detailText) {
+                label.title = detailText;
+                container.title = detailText;
+            } else {
+                label.removeAttribute('title');
+                container.removeAttribute('title');
+            }
+        }
+        function scheduleApiHealthChecks() {
+            if (apiHealthTimerId) clearInterval(apiHealthTimerId);
+            const hasConfig = config.apiUrl && config.apiKey && config.modelName;
+            if (!hasConfig) return;
+            apiHealthTimerId = setInterval(() => testApiConnectivity('periodic'), 60000);
+        }
     </script>
 </body>
-</html> 
+
+</html>
