@@ -1752,6 +1752,167 @@
             height: 18px;
             fill: currentColor;
         }
+
+        /* 导入/导出按钮样式 */
+        .prompt-import-export {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .import-export-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-import-export {
+            background: #f8f9fa;
+            color: #495057;
+            border: 1px solid #dee2e6;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-import-export:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+            color: #333;
+        }
+
+        .btn-import-export:active {
+            transform: translateY(1px);
+        }
+
+        /* 导入成功/失败提示样式 */
+        .import-result {
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            display: none;
+        }
+
+        .import-result.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .import-result.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .import-result.info {
+            background: #cce7ff;
+            color: #004085;
+            border: 1px solid #99d5ff;
+        }
+
+        /* API测试按钮样式 */
+        .test-api-btn {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 2px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            opacity: 0.7;
+        }
+
+        .test-api-btn:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .test-api-btn:active {
+            transform: scale(0.95);
+        }
+
+        .test-api-btn .material-symbols-outlined {
+            font-size: 12px;
+        }
+
+        /* 设置页面API测试区域样式 */
+        .api-test-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-test-api {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            justify-content: center;
+            width: fit-content;
+        }
+
+        .btn-test-api:hover:not(:disabled) {
+            background: #0056CC;
+            transform: translateY(-1px);
+        }
+
+        .btn-test-api:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-test-api.testing {
+            background: #17a2b8;
+        }
+
+        .btn-test-api.testing .material-symbols-outlined {
+            animation: spin 1s linear infinite;
+        }
+
+        .api-test-result {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            display: none;
+            border: 1px solid transparent;
+        }
+
+        .api-test-result.success {
+            background: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        .api-test-result.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        .api-test-result.info {
+            background: #cce7ff;
+            color: #004085;
+            border-color: #99d5ff;
+        }
     </style>
 </head>
 
@@ -1915,6 +2076,17 @@
 
                 </div>
 
+                <!-- API测试区域 -->
+                <div class="form-group">
+                    <label>API连通性测试</label>
+                    <div class="api-test-section">
+                        <button class="btn-test-api" id="testApiBtn" type="button">
+                            <span class="material-symbols-outlined icon-small">wifi_tethering</span>
+                            <span>测试连接</span>
+                        </button>
+                        <div id="apiTestResult" class="api-test-result"></div>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="customPrompt" data-i18n="prompt">提示词</label>
@@ -1947,6 +2119,22 @@
                                 data-prompt="你是一个技术文档翻译专家。请将以下技术文本翻译成{targetLanguage}，保持专业术语的准确性。只返回翻译结果。"
                                 data-i18n="templateTechnical">技术</span>
                             <!-- 自定义模板将动态插入到这里 -->
+                        </div>
+                        
+                        <!-- 导入/导出提示词模板 -->
+                        <div class="prompt-import-export">
+                            <div class="import-export-buttons">
+                                <button class="btn-import-export" id="importPromptsBtn" title="导入提示词模板">
+                                    <span class="material-symbols-outlined icon-small">upload_file</span>
+                                    <span>导入</span>
+                                </button>
+                                <button class="btn-import-export" id="exportPromptsBtn" title="导出提示词模板">
+                                    <span class="material-symbols-outlined icon-small">download</span>
+                                    <span>导出</span>
+                                </button>
+                            </div>
+                            <div id="importResult" class="import-result"></div>
+                            <input type="file" id="promptFileInput" accept=".json" style="display: none;">
                         </div>
                     </div>
                 </div>
@@ -2565,7 +2753,7 @@
                 config.customPrompts.forEach(prompt => {
                     const option = document.createElement('option');
                     option.value = `custom_${prompt.id}`;
-                    option.textContent = `${prompt.name} (自定义)`;
+                    option.textContent = `${prompt.name} *`;
                     option.setAttribute('data-prompt', prompt.content);
                     quickPromptSelect.appendChild(option);
                 });
@@ -2678,6 +2866,16 @@
         elements.targetLanguage.addEventListener('change', saveLanguage);
         elements.savePromptBtn.addEventListener('click', saveCustomPrompt);
         elements.quickSaveModelBtn.addEventListener('click', saveCustomModel); // 添加快速保存按钮事件
+
+        // 导入/导出事件监听
+        document.getElementById('importPromptsBtn').addEventListener('click', importPrompts);
+        document.getElementById('exportPromptsBtn').addEventListener('click', exportPrompts);
+        document.getElementById('promptFileInput').addEventListener('change', handlePromptFileImport);
+
+        // API测试按钮事件监听
+        document.getElementById('testApiBtn').addEventListener('click', () => {
+            testApiConnectivity('manual');
+        });
 
         // 为模型输入框添加回车键快速保存
         elements.modelName.addEventListener('keydown', (e) => {
@@ -2866,6 +3064,15 @@
                     // 更新快速切换模型下拉框
                     renderQuickModelSelect();
                     break;
+
+                case 'prompts-imported':
+                    showStatus(`成功导入 ${msg.count} 个提示词模板`, 'success');
+                    // 更新本地config中的自定义提示词数据
+                    config.customPrompts = msg.prompts;
+                    // 重新渲染界面
+                    renderCustomPrompts(config.customPrompts);
+                    renderQuickPromptSelect();
+                    break;
             }
         };
 
@@ -2917,49 +3124,152 @@
         // API 连通性测试
         let apiHealthTimerId = null;
         async function testApiConnectivity(reason = 'manual') {
+            const testBtn = document.getElementById('testApiBtn');
+            const testResult = document.getElementById('apiTestResult');
+            
             try {
                 // 如果未配置，显示未配置状态
                 const hasConfig = config.apiUrl && config.apiKey && config.modelName;
                 if (!hasConfig) {
+                    if (reason === 'manual') {
+                        showApiTestResult('请先配置API地址、密钥和模型名称', 'error');
+                    }
                     setApiStatus('not-configured', t('statusConfigNeeded'));
                     return;
                 }
+                
+                // 设置按钮为测试中状态
+                if (reason === 'manual') {
+                    testBtn.disabled = true;
+                    testBtn.classList.add('testing');
+                    testBtn.innerHTML = '<span class="material-symbols-outlined icon-small">wifi_tethering</span><span>测试中...</span>';
+                    showApiTestResult('正在测试API连通性...', 'info');
+                }
+                
                 // 设置为测试中
                 setApiStatus('testing', t('statusApiTestingShort'));
+                
                 // 7秒超时控制
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 7000);
+                
+                // 使用更兼容的测试请求格式
+                const testRequest = {
+                    model: config.modelName,
+                    messages: [
+                        { role: 'user', content: 'Hello' }
+                    ],
+                    max_tokens: 5,
+                    temperature: 0
+                };
+                
+                // 根据API类型和模型名称调整请求格式
+                if (config.apiUrl.includes('openai.com') || config.apiUrl.includes('api.openai.com') || 
+                    config.modelName.includes('gpt') || config.modelName.includes('openai')) {
+                    // OpenAI格式
+                    testRequest.messages = [
+                        { role: 'user', content: 'Hi' }
+                    ];
+                } else if (config.apiUrl.includes('claude') || config.apiUrl.includes('anthropic') || 
+                           config.modelName.includes('claude')) {
+                    // Claude格式
+                    testRequest.messages = [
+                        { role: 'user', content: 'Hi' }
+                    ];
+                } else if (config.apiUrl.includes('qwen') || config.apiUrl.includes('dashscope') || 
+                           config.modelName.includes('qwen')) {
+                    // 通义千问格式
+                    testRequest.messages = [
+                        { role: 'user', content: 'Hi' }
+                    ];
+                } else {
+                    // 通用格式，尝试最小化请求
+                    testRequest.max_tokens = 1;
+                    testRequest.messages = [
+                        { role: 'user', content: 'Hi' }
+                    ];
+                }
+                
                 const resp = await fetch(config.apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${config.apiKey}`
                     },
-                    body: JSON.stringify({
-                        model: config.modelName,
-                        messages: [
-                            { role: 'system', content: 'healthcheck' },
-                           	{ role: 'user', content: 'ping' }
-                        ],
-                        temperature: 0,
-                        max_tokens: 1
-                    }),
+                    body: JSON.stringify(testRequest),
                     signal: controller.signal
                 });
+                
                 clearTimeout(timeoutId);
+                
                 if (resp.ok) {
                     setApiStatus('configured', t('statusApiOkShort'));
+                    if (reason === 'manual') {
+                        showApiTestResult('API连通性测试成功！', 'success');
+                    }
                     logSystem && logSystem.addLog(`API连通性正常（原因: ${reason}）`, 'success');
                 } else {
-                    setApiStatus('error', `${t('statusApiErrorShort')}: ${resp.status} ${resp.statusText}`);
-                    logSystem && logSystem.addLog(`API连通性失败（原因: ${reason}）：${resp.status} ${resp.statusText}`, 'error');
+                    // 即使返回错误状态码，也检查响应内容
+                    try {
+                        const errorData = await resp.json();
+                        const errorMsg = errorData.error?.message || errorData.message || `${resp.status} ${resp.statusText}`;
+                        setApiStatus('error', `${t('statusApiErrorShort')}: ${errorMsg}`);
+                        if (reason === 'manual') {
+                            showApiTestResult(`API连通性测试失败: ${errorMsg}`, 'error');
+                        }
+                        logSystem && logSystem.addLog(`API连通性失败（原因: ${reason}）：${errorMsg}`, 'error');
+                    } catch (parseError) {
+                        // 如果无法解析错误信息，使用状态码
+                        const errorMsg = `${resp.status} ${resp.statusText}`;
+                        setApiStatus('error', `${t('statusApiErrorShort')}: ${errorMsg}`);
+                        if (reason === 'manual') {
+                            showApiTestResult(`API连通性测试失败: ${errorMsg}`, 'error');
+                        }
+                        logSystem && logSystem.addLog(`API连通性失败（原因: ${reason}）：${errorMsg}`, 'error');
+                    }
                 }
             } catch (e) {
-                const message = e.name === 'AbortError' ? 'API连通超时' : `API连通异常: ${e.message}`;
+                let message = '';
+                if (e.name === 'AbortError') {
+                    message = 'API连通超时';
+                } else if (e.message.includes('Failed to fetch') || e.message.includes('NetworkError')) {
+                    message = '网络连接失败，请检查网络设置';
+                } else if (e.message.includes('CORS')) {
+                    message = 'CORS错误，请检查API配置';
+                } else {
+                    message = `API连通异常: ${e.message}`;
+                }
+                
                 setApiStatus('error', message);
+                if (reason === 'manual') {
+                    showApiTestResult(`API连通性测试失败: ${message}`, 'error');
+                }
                 logSystem && logSystem.addLog(`${message}`, 'error');
+            } finally {
+                // 恢复按钮状态
+                if (reason === 'manual') {
+                    testBtn.disabled = false;
+                    testBtn.classList.remove('testing');
+                    testBtn.innerHTML = '<span class="material-symbols-outlined icon-small">wifi_tethering</span><span>测试连接</span>';
+                }
             }
         }
+
+        // 显示API测试结果
+        function showApiTestResult(message, type = 'info') {
+            const resultElement = document.getElementById('apiTestResult');
+            if (resultElement) {
+                resultElement.textContent = message;
+                resultElement.className = `api-test-result ${type}`;
+                resultElement.style.display = 'block';
+                
+                // 5秒后自动隐藏
+                setTimeout(() => {
+                    resultElement.style.display = 'none';
+                }, 5000);
+            }
+        }
+
         function setApiStatus(status, detailText) {
             const container = elements.configStatus;
             const indicator = elements.statusIndicator;
@@ -3002,6 +3312,156 @@
             const hasConfig = config.apiUrl && config.apiKey && config.modelName;
             if (!hasConfig) return;
             apiHealthTimerId = setInterval(() => testApiConnectivity('periodic'), 60000);
+        }
+
+        // 导入提示词模板
+        function importPrompts() {
+            const fileInput = document.getElementById('promptFileInput');
+            fileInput.click();
+        }
+
+        // 处理文件导入
+        function handlePromptFileImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const content = JSON.parse(e.target.result);
+                    processImportedPrompts(content);
+                } catch (error) {
+                    showImportResult('JSON文件格式错误，请检查文件内容', 'error');
+                }
+            };
+            reader.readAsText(file);
+            
+            // 清空文件输入，允许重复选择同一文件
+            event.target.value = '';
+        }
+
+        // 处理导入的提示词数据
+        function processImportedPrompts(importedData) {
+            try {
+                // 验证数据结构
+                if (!Array.isArray(importedData)) {
+                    showImportResult('导入文件格式错误：应为数组格式', 'error');
+                    return;
+                }
+
+                let validPrompts = [];
+                let skippedCount = 0;
+                let errorCount = 0;
+
+                importedData.forEach((item, index) => {
+                    // 验证必要字段
+                    if (!item.name || !item.content) {
+                        skippedCount++;
+                        return;
+                    }
+
+                    // 检查是否已存在相同名称的提示词
+                    const existingPrompt = config.customPrompts.find(p => p.name === item.name);
+                    if (existingPrompt) {
+                        // 如果已存在，可以选择跳过或覆盖
+                        skippedCount++;
+                        return;
+                    }
+
+                    // 创建新的提示词对象
+                    const newPrompt = {
+                        id: Date.now().toString() + '_' + index, // 生成唯一ID
+                        name: item.name.trim(),
+                        content: item.content.trim()
+                    };
+
+                    validPrompts.push(newPrompt);
+                });
+
+                if (validPrompts.length === 0) {
+                    showImportResult('没有找到有效的提示词模板', 'warning');
+                    return;
+                }
+
+                // 合并到现有配置中
+                config.customPrompts = [...(config.customPrompts || []), ...validPrompts];
+
+                // 发送到后端保存
+                parent.postMessage({
+                    pluginMessage: {
+                        type: 'import-prompts',
+                        prompts: validPrompts
+                    }
+                }, '*');
+
+                // 显示导入结果
+                const message = `成功导入 ${validPrompts.length} 个提示词模板`;
+                const details = [];
+                if (skippedCount > 0) details.push(`跳过 ${skippedCount} 个重复项`);
+                if (errorCount > 0) details.push(`错误 ${errorCount} 个无效项`);
+                
+                if (details.length > 0) {
+                    showImportResult(`${message}（${details.join('，')}）`, 'success');
+                } else {
+                    showImportResult(message, 'success');
+                }
+
+                // 重新渲染界面
+                renderCustomPrompts(config.customPrompts);
+                renderQuickPromptSelect();
+
+            } catch (error) {
+                showImportResult(`处理导入数据时出错: ${error.message}`, 'error');
+            }
+        }
+
+        // 导出提示词模板
+        function exportPrompts() {
+            try {
+                const exportData = config.customPrompts || [];
+                
+                if (exportData.length === 0) {
+                    showImportResult('没有可导出的提示词模板', 'info');
+                    return;
+                }
+
+                // 准备导出数据（不包含内部ID）
+                const exportPrompts = exportData.map(prompt => ({
+                    name: prompt.name,
+                    content: prompt.content
+                }));
+
+                // 创建并下载文件
+                const blob = new Blob([JSON.stringify(exportPrompts, null, 2)], { 
+                    type: 'application/json' 
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `lumitrans-prompts-${new Date().toISOString().slice(0, 10)}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                showImportResult(`成功导出 ${exportData.length} 个提示词模板`, 'success');
+
+            } catch (error) {
+                showImportResult(`导出失败: ${error.message}`, 'error');
+            }
+        }
+
+        // 显示导入结果
+        function showImportResult(message, type = 'info') {
+            const resultElement = document.getElementById('importResult');
+            resultElement.textContent = message;
+            resultElement.className = `import-result ${type}`;
+            resultElement.style.display = 'block';
+
+            // 3秒后自动隐藏
+            setTimeout(() => {
+                resultElement.style.display = 'none';
+            }, 3000);
         }
     </script>
 </body>
